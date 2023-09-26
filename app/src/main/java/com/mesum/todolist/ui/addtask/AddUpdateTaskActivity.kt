@@ -5,12 +5,10 @@ import androidx.appcompat.app.ActionBar
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+
 import com.mesum.todolist.R
 import com.mesum.todolist.databinding.ActivityAddUpdateTaskBinding
+import com.mesum.todolist.util.addFragmentToActivity
 
 class AddUpdateTaskActivity : AppCompatActivity() {
 
@@ -32,14 +30,35 @@ class AddUpdateTaskActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
+        val taskId = intent.getStringExtra(AddUpdateTaskFragment.ARGUMENT_EDIT_TASK_ID)
+        setToolbarTitle(taskId)
 
+        if (supportFragmentManager.findFragmentById(R.id.contentFrame) == null) {
+            val addEditTaskFragment = AddUpdateTaskFragment.invoke()
 
-        binding.addTask.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.add_task)
-                .setAction("Action", null).show()
+            if (taskId != null) {
+                val args = Bundle()
+                args.putString(AddUpdateTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId)
+                addEditTaskFragment.arguments = args
+            }
+
+            addFragmentToActivity(supportFragmentManager, addEditTaskFragment, R.id.contentFrame)
         }
+
+
     }
 
+    private fun setToolbarTitle(taskId: String?) {
+        actionBar.setTitle(if (taskId == null) R.string.add_task else R.string.edit_task)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    companion object {
+        const val REQUEST_ADD_TASK = 1
+    }
 
 }

@@ -15,7 +15,7 @@ data class AddTaskViewState(
     val priority : Int ,
     val creatingTask : Boolean ,
     val showProgressBar: Boolean ,
-    val error: Throwable?
+    val error: String?
 ) : State {
     companion object {
         fun idle(): AddTaskViewState {

@@ -66,6 +66,8 @@ class AddTaskFragment : Fragment() {
         binding.progressCircular.visibility = if (viewState.showProgressBar){
             View.VISIBLE
         }else View.GONE
+
+        binding.addTaskTitle.error = viewState.error
     }
 
     companion object {

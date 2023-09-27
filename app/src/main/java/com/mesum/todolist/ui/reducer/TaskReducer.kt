@@ -42,15 +42,21 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
                 // Handle task creation failure (e.g., show error message)
                 taskCreationFailed(currentState, action)
             }
+            is TaskAction.InvalidTask ->{
+                invalidTaskCreation(currentState)
+            }
             // Handle other actions for updating and managing tasks here
             else -> currentState
         }
     }
 
+    private fun invalidTaskCreation(currentState: AddTaskViewState) =
+        currentState.copy(error = "Database entry failed")
+
     private fun taskCreationFailed(
         currentState: AddTaskViewState,
         action: TaskAction.TaskCreationFailed
-    ) = currentState.copy(creatingTask = false, error = action.error)
+    ) = currentState.copy(creatingTask = false, error = "Database Entry Error")
 
     private fun completeTaskCreation(currentState: AddTaskViewState) =
         currentState.copy(
@@ -64,10 +70,10 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
         )
 
     private fun createTask(currentState: AddTaskViewState) =
-        currentState.copy(creatingTask = true, error = null, showProgressBar = true)
+        currentState.copy(creatingTask = true, error = "", showProgressBar = true)
 
     private fun startTaskCreation(currentState: AddTaskViewState) =
-        currentState.copy(creatingTask = true, error = null)
+        currentState.copy(creatingTask = true, error = "")
 
     private fun newStateWithPriority(
         currentState: AddTaskViewState,
@@ -92,6 +98,6 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
     private fun newStateWithTitle(
         currentState: AddTaskViewState,
         action: TaskAction.TaskTitleChanged
-    ) = currentState.copy(title = action.newTitle)
+    ) = currentState.copy(title = action.newTitle, error = null)
 }
 

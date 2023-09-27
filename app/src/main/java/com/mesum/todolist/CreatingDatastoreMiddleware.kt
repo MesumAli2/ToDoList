@@ -7,25 +7,25 @@ import com.mesum.todolist.ui.action.TaskAction
 import com.mesum.todolist.ui.addtask.AddTaskViewState
 
 class CreatingDatastoreMiddleware(
-    private val addTaskRepository: CreateTaskRepository,
+    private val addTaskRepository: CreateTaskRepository
 ) : Middleware<AddTaskViewState, TaskAction> {
 
     override suspend fun process(
         action: TaskAction,
         currentState: AddTaskViewState,
-        store: Store<AddTaskViewState, TaskAction>,
+        store: Store<AddTaskViewState, TaskAction>
     ) {
         when (action) {
             is TaskAction.CreateTaskButtonClicked -> {
                 if (currentState.title.isEmpty() || currentState.description.isEmpty()) {
-                    store.dispatch(TaskAction.TaskCreationFailed(Error()))
+                    store.dispatch(TaskAction.InvalidTask)
                     return
                 }
 
                 createTask(store, currentState)
             }
-
-            else -> {}
+            else ->{
+            }
         }
     }
 
@@ -37,7 +37,7 @@ class CreatingDatastoreMiddleware(
 
         val isSuccessful = addTaskRepository.intiTask(
             title = currentState.title,
-            description = currentState.description,
+            description = currentState.description
         )
 
         if (isSuccessful) {

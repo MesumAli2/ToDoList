@@ -16,17 +16,18 @@ sealed class TaskAction : Action {
     object CreateTaskButtonClicked : TaskAction()
     object TaskCreationStarted : TaskAction()
     object TaskCreationCompleted : TaskAction()
+    object InvalidTask : TaskAction()
     data class TaskCreationFailed(val error: Throwable?) : TaskAction()
 
-    // For task updating
-    data class UpdateTaskButtonClicked(val taskId: String) : TaskAction()
-    object TaskUpdateStarted : TaskAction()
-    object TaskUpdateCompleted : TaskAction()
-    data class TaskUpdateFailed(val error: Throwable?) : TaskAction()
-
-    // For task deletion
-    data class DeleteTaskButtonClicked(val taskId: String) : TaskAction()
-    object TaskDeletionStarted : TaskAction()
-    object TaskDeletionCompleted : TaskAction()
-    data class TaskDeletionFailed(val error: Throwable?) : TaskAction()
+//    // For task updating
+//    data class UpdateTaskButtonClicked(val taskId: String) : TaskAction()
+//    object TaskUpdateStarted : TaskAction()
+//    object TaskUpdateCompleted : TaskAction()
+//    data class TaskUpdateFailed(val error: Throwable?) : TaskAction()
+//
+//    // For task deletion
+//    data class DeleteTaskButtonClicked(val taskId: String) : TaskAction()
+//    object TaskDeletionStarted : TaskAction()
+//    object TaskDeletionCompleted : TaskAction()
+//    data class TaskDeletionFailed(val error: Throwable?) : TaskAction()
 }

@@ -10,7 +10,6 @@ import com.mesum.todolist.ui.addtask.AddTaskViewState
  */
 class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
     override fun reduce(currentState: AddTaskViewState, action: TaskAction): AddTaskViewState {
-        Log.v("LogReducer","Processing action $action")
         return when (action) {
             is TaskAction.TaskTitleChanged -> {
                 newStateWithTitle(currentState, action)

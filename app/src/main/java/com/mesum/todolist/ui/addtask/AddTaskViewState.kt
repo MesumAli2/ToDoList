@@ -8,12 +8,30 @@ import com.mesum.todolist.redux.state.State
 data class AddTaskViewState(
     val isEmpty: Boolean = false,
     val isSaved: Boolean = false,
-    val title: String = "",
-    val description: String = "",
-    val dueDate : String? = "",
-    val category: String = "",
-    val priority : Int = 0,
-    val creatingTask : Boolean = false,
-    val showProgressBar: Boolean = false,
-    val error: Throwable? = null
-) : State
+    val title: String,
+    val description: String ,
+    val dueDate : String? ,
+    val category: String ,
+    val priority : Int ,
+    val creatingTask : Boolean ,
+    val showProgressBar: Boolean ,
+    val error: Throwable?
+) : State {
+    companion object {
+        fun idle(): AddTaskViewState {
+            return AddTaskViewState(
+                title = "",
+                description = "",
+                error = null,
+                isEmpty = false,
+                isSaved = false,
+                dueDate = "",
+                category = "",
+                priority = 0,
+                creatingTask = false,
+                showProgressBar = false,
+
+            )
+        }
+    }
+}

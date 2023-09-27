@@ -2,7 +2,6 @@ package com.mesum.todolist.ui.addtask
 
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 
@@ -10,7 +9,7 @@ import com.mesum.todolist.R
 import com.mesum.todolist.databinding.ActivityAddUpdateTaskBinding
 import com.mesum.todolist.util.addFragmentToActivity
 
-class AddUpdateTaskActivity : AppCompatActivity() {
+class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddUpdateTaskBinding
     private lateinit var actionBar: ActionBar
@@ -30,15 +29,15 @@ class AddUpdateTaskActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
-        val taskId = intent.getStringExtra(AddUpdateTaskFragment.ARGUMENT_EDIT_TASK_ID)
+        val taskId = intent.getStringExtra(AddTaskFragment.ARGUMENT_EDIT_TASK_ID)
         setToolbarTitle(taskId)
 
         if (supportFragmentManager.findFragmentById(R.id.contentFrame) == null) {
-            val addEditTaskFragment = AddUpdateTaskFragment.invoke()
+            val addEditTaskFragment = AddTaskFragment.invoke()
 
             if (taskId != null) {
                 val args = Bundle()
-                args.putString(AddUpdateTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId)
+                args.putString(AddTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId)
                 addEditTaskFragment.arguments = args
             }
 

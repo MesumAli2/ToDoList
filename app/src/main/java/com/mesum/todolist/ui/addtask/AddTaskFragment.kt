@@ -9,7 +9,7 @@ import com.mesum.todolist.R
 
 
 
-class AddUpdateTaskFragment : Fragment() {
+class AddTaskFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +28,6 @@ class AddUpdateTaskFragment : Fragment() {
     companion object {
         const val ARGUMENT_EDIT_TASK_ID = "Update_TASK_ID"
 
-        operator fun invoke(): AddUpdateTaskFragment = AddUpdateTaskFragment()
+        operator fun invoke(): AddTaskFragment = AddTaskFragment()
     }
 }

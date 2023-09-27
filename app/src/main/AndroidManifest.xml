@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".ui.addtask.AddUpdateTaskActivity"
+            android:name=".ui.addtask.AddTaskActivity"
             android:exported="false"
             android:label="@string/title_activity_add_update_task"
             android:theme="@style/Theme.ToDoList" />

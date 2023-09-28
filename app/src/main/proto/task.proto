@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.mesum.todolist";
+option java_multiple_files = true;
+
+message TaskViewState {
+  bool is_empty = 1;
+  bool is_saved = 2;
+  string title = 3;
+  string description = 4;
+  string due_date = 5;
+  string category = 6;
+  int32 priority = 7;
+  bool creating_task = 8;
+  bool show_progress_bar = 9;
+  string error = 10;
+}

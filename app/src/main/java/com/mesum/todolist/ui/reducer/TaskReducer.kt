@@ -61,6 +61,7 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
     private fun completeTaskCreation(currentState: AddTaskViewState) =
         currentState.copy(
             creatingTask = false,
+            error = null,
             title = "",
             description = "",
             showProgressBar = false,
@@ -70,10 +71,10 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
         )
 
     private fun createTask(currentState: AddTaskViewState) =
-        currentState.copy(creatingTask = true, error = "", showProgressBar = true)
+        currentState.copy(creatingTask = true,  showProgressBar = true)
 
     private fun startTaskCreation(currentState: AddTaskViewState) =
-        currentState.copy(creatingTask = true, error = "")
+        currentState.copy(creatingTask = true)
 
     private fun newStateWithPriority(
         currentState: AddTaskViewState,

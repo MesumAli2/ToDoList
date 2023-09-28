@@ -1,16 +1,22 @@
 package com.mesum.todolist.ui.addtask
 
+import android.app.Application
+import android.content.Context
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mesum.todolist.CreateTaskRepository
 import com.mesum.todolist.CreateTaskService
 import com.mesum.todolist.CreatingDatastoreMiddleware
 import com.mesum.todolist.LoggingMiddleware
+import com.mesum.todolist.TaskViewState
+import com.mesum.todolist.data.TaskViewStateSerializer
 import com.mesum.todolist.redux.store.Store
 import com.mesum.todolist.ui.action.TaskAction
 import com.mesum.todolist.ui.reducer. TaskReducer
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 /**
  * The [AddTaskViewModel] is responsible for controlling the UI logic of the add task screen. It will
@@ -19,7 +25,7 @@ import kotlinx.coroutines.launch
  * Proxy corresponding [TaskAction] to the store whenever a view action occurs, such as [taskTitleChanged]
  * or [createTaskButtonClicked].
  */
-class AddTaskViewModel : ViewModel() {
+class AddTaskViewModel() : ViewModel() {
     private val store = Store(
         initialState = AddTaskViewState.idle(),
         reducer = TaskReducer(),
@@ -30,6 +36,8 @@ class AddTaskViewModel : ViewModel() {
             )
         )
     )
+
+
 
     val viewState: StateFlow<AddTaskViewState> = store.state
 

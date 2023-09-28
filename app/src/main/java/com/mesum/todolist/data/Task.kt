@@ -1,14 +1,19 @@
 package com.mesum.todolist.data
 
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.serialization.Serializable
 import java.util.UUID
 
+
+@Serializable
 data class Task(
-    val id: String,
-    val title: String,
-    val description: String,
-    val dueDate: String?,
-    val category: String,
-    val priority: Int,
+    val id: String = UUID.randomUUID().toString(),
+    val title: String= "",
+    val description: String = "",
+    val dueDate: String? = "",
+    val category: String = "",
+    val priority: Int = 0,
     val isCompleted: Boolean = false
 ){
     val titleForList =
@@ -21,3 +26,9 @@ data class Task(
     val empty = title.isEmpty() && description.isEmpty()
 }
 
+
+
+@Serializable
+data class Tasks(
+    val tasks : MutableList<Task> = mutableListOf()
+)

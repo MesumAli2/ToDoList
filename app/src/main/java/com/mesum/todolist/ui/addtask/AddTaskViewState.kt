@@ -6,8 +6,8 @@ import com.mesum.todolist.redux.state.State
  * implements state that describes the configuration AddTask Screen
  */
 data class AddTaskViewState(
-    val isEmpty: Boolean = false,
-    val isSaved: Boolean = false,
+    val isEmpty: Boolean ,
+    val isSaved: Boolean ,
     val title: String,
     val description: String ,
     val dueDate : String? ,

@@ -1,9 +1,11 @@
 package com.mesum.todolist.ui.tasks
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mesum.todolist.CreatingDatastoreMiddleware
 import com.mesum.todolist.LoggingMiddleware
+import com.mesum.todolist.Task
 import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.domain.usecase.LoadTasksUseCase
 import com.mesum.todolist.redux.Store
@@ -13,12 +15,22 @@ import com.mesum.todolist.ui.addtask.AddTaskViewState
 import com.mesum.todolist.ui.reducer.TaskReducer
 import com.mesum.todolist.ui.reducer.ViewTaskReducer
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TasksViewModel@Inject constructor(
-    private val loadTasksUseCase: LoadTasksUseCase
+
+     loadTasksUseCase: LoadTasksUseCase,
+     @ApplicationContext context: Context
+
 ) : ViewModel() {
+    init {
+        startLoadingTask()
+    }
 
     private val store = Store(
         initialState = ViewTaskViewState.idle(), // Use ViewTaskViewState for viewing tasks
@@ -26,15 +38,32 @@ class TasksViewModel@Inject constructor(
         middlewares = listOf(
             LoggingMiddleware<ViewTaskViewState, ViewTaskAction>(), // Use ViewTaskViewState and ViewTaskAction here
             ViewingDatastoreMiddleware(
-                loadTasksUseCase = loadTasksUseCase
+                loadTasksUseCase = loadTasksUseCase,
+                context = context
+
             )
         )
     )
 
-    fun loadTask(newDueDate: String) {
-        val action = TaskAction.TaskDueDateChanged(newDueDate)
+    val viewState = store.state
+
+
+    private  fun startLoadingTask() {
+        val action = ViewTaskAction.LoadTasksStarted
         viewModelScope.launch {
-           // store.dispatch(action)
+           store.dispatch(action)
         }
     }
+
+
+
+    // Create a function to observe the loaded tasks
+    fun observeLoadedTasks(): Flow<List<com.mesum.todolist.data.Task>> {
+        // Replace 'viewState' with your desired state property
+        return viewState.map { it.allTasks }
+    }
+
+
+
+
 }

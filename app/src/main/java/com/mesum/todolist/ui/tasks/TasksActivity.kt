@@ -6,7 +6,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.mesum.todolist.R
 import com.mesum.todolist.util.addFragmentToActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TasksActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
 

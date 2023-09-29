@@ -1,10 +1,15 @@
 package com.mesum.todolist.data
 
 import android.content.Context
+import android.util.Log
 import com.mesum.todolist.domain.repository.TasksRepository
 import com.mesum.todolist.util.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TasksRepositoryImpl @Inject constructor(
@@ -12,14 +17,10 @@ class TasksRepositoryImpl @Inject constructor(
 ) : TasksRepository {
 
 
-    override suspend fun loadTasks(): List<Task> {
-        return try {
-            val tasksData = context.dataStore.data.firstOrNull() ?: Tasks()
-            tasksData.tasks // Return the list of tasks from the DataStore
-        } catch (e: Exception) {
-            // Handle any exceptions that may occur during the data retrieval
-            emptyList()
-        }
+    override suspend fun loadTasks(): MutableList<Task> {
+
+
+    return context.dataStore.data.firstOrNull()?.tasks?.toMutableList() ?: mutableListOf()
     }
 
 }

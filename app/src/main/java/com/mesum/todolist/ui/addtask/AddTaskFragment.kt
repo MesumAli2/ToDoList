@@ -1,6 +1,7 @@
 package com.mesum.todolist.ui.addtask
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.data.local.TaskStateSerializer
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
+import com.mesum.todolist.ui.tasks.TasksActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -78,6 +80,13 @@ class AddTaskFragment : Fragment() {
         }
 
         lifecycleScope.launch {
+            viewModel.viewState.collectLatest {
+                if (it.taskAdded){
+                    val intent = Intent(requireActivity(), TasksActivity::class.java)
+                    startActivity(intent)
+
+                }
+            }
           //  updateTaskTitle("now we add iphone 5", "Iphone 14 pro Max")
         }
         binding.btnSave.setOnClickListener {
@@ -88,6 +97,8 @@ class AddTaskFragment : Fragment() {
             }
 
             viewModel.createTaskButtonClicked()
+            viewModel
+
         }
     }
 

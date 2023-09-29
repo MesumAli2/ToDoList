@@ -2,24 +2,37 @@ package com.mesum.todolist.ui.tasks
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mesum.todolist.R
+import com.mesum.todolist.data.Tasks
+import com.mesum.todolist.databinding.FragmentTaskBinding
+import com.mesum.todolist.ui.adapter.TaskListAdapter
 import com.mesum.todolist.ui.addtask.AddTaskActivity
+import com.mesum.todolist.util.dataStore
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-
+@AndroidEntryPoint
 class TasksFragment : Fragment() {
 
 
-
+    private val viewMode : TasksViewModel by viewModels()
+    private  var _binding: FragmentTaskBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreateView(
@@ -27,14 +40,27 @@ class TasksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task, container, false)
+        _binding = FragmentTaskBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab_add_task)
 
         fab.setOnClickListener { showAddTask() }
+        val adapter = TaskListAdapter()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewMode.viewState.collect {
+                Log.d("TasksViewState", it.toString())
+                adapter.submitList(it.allTasks.reversed())
+
+            }
+
+        }
+        binding.recyclerViewTask.adapter = adapter
     }
 
     private fun showAddTask() {

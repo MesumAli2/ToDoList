@@ -1,11 +1,19 @@
 package com.mesum.todolist.ui.tasks
 
+import android.content.Context
+import com.mesum.todolist.data.Task
+import com.mesum.todolist.data.Tasks
 import com.mesum.todolist.domain.usecase.LoadTasksUseCase
 import com.mesum.todolist.redux.Middleware
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.ViewTaskAction
+import com.mesum.todolist.util.dataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.firstOrNull
+import javax.inject.Inject
 
-class ViewingDatastoreMiddleware(
+class ViewingDatastoreMiddleware @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val loadTasksUseCase: LoadTasksUseCase,
     // Other dependencies as needed
 ) : Middleware<ViewTaskViewState, ViewTaskAction> {
@@ -42,13 +50,13 @@ class ViewingDatastoreMiddleware(
     }
 
     private suspend fun loadTasks(store: Store<ViewTaskViewState, ViewTaskAction>) {
-        store.dispatch(ViewTaskAction.LoadTasksStarted)
-
+    //    store.dispatch(ViewTaskAction.LoadTasksStarted)
         // Load tasks from a data source using the loadTasksUseCase or repository
-        val loadedTasks = loadTasksUseCase.execute(Unit)
+     //   val loadedTasks = loadTasksUseCase.execute()
+
 
         // Dispatch the loaded tasks to update the state
-        store.dispatch(ViewTaskAction.LoadTasksCompleted(loadedTasks))
+        store.dispatch(ViewTaskAction.LoadTasksCompleted(context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()))
     }
 
     private suspend fun filterTasksByCategory(

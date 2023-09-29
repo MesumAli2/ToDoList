@@ -18,7 +18,8 @@ data class AddTaskViewState(
     val creatingTask : Boolean ,
     val showProgressBar: Boolean ,
     val isCompleted: Boolean,
-    val error: String?
+    val error: String?,
+    val taskAdded : Boolean
 ) : State {
     companion object {
         fun idle(): AddTaskViewState {
@@ -34,7 +35,8 @@ data class AddTaskViewState(
                 priority = 0,
                 creatingTask = false,
                 showProgressBar = false,
-                isCompleted = false
+                isCompleted = false,
+                taskAdded = false
 
             )
         }

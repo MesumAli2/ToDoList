@@ -50,9 +50,9 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
 
         // Update the state with the loaded tasks
         return currentState.copy(
-            allTasks = loadedTasks.allTasks,
-            completedTasks = loadedTasks.completedTasks,
-            activeTasks = loadedTasks.activeTasks
+            allTasks = loadedTasks,
+            completedTasks = listOf(),
+            activeTasks = listOf()
         )
     }
 

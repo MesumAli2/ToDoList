@@ -1,7 +1,6 @@
 package com.mesum.todolist.ui.reducer
 
-import android.util.Log
-import com.mesum.todolist.redux.reducer.Reducer
+import com.mesum.todolist.redux.Reducer
 import com.mesum.todolist.ui.action.TaskAction
 import com.mesum.todolist.ui.addtask.AddTaskViewState
 
@@ -70,11 +69,17 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
             priority = 1
         )
 
+
+
     private fun createTask(currentState: AddTaskViewState) =
         currentState.copy(creatingTask = true,  showProgressBar = true)
 
-    private fun startTaskCreation(currentState: AddTaskViewState) =
-        currentState.copy(creatingTask = true)
+    private fun startTaskCreation(currentState: AddTaskViewState) : AddTaskViewState {
+        val updatedTasks = currentState
+
+      return  currentState.copy(creatingTask = true)
+
+    }
 
     private fun newStateWithPriority(
         currentState: AddTaskViewState,

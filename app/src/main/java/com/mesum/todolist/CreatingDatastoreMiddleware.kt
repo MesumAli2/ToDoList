@@ -1,13 +1,16 @@
 package com.mesum.todolist
 
 
-import com.mesum.todolist.redux.middleware.Middleware
-import com.mesum.todolist.redux.store.Store
+import android.content.Context
+import com.mesum.todolist.domain.usecase.CreateTaskUseCase
+import com.mesum.todolist.redux.Middleware
+import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
 import com.mesum.todolist.ui.addtask.AddTaskViewState
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 class CreatingDatastoreMiddleware(
-    private val addTaskRepository: CreateTaskRepository
+    private val createTaskUseCase: CreateTaskUseCase,
 ) : Middleware<AddTaskViewState, TaskAction> {
 
     override suspend fun process(
@@ -35,13 +38,16 @@ class CreatingDatastoreMiddleware(
     ) {
         store.dispatch(TaskAction.TaskCreationStarted)
 
-        val isSuccessful = addTaskRepository.intiTask(
-            title = currentState.title,
-            description = currentState.description
-        )
+//        val isSuccessful = addTaskRepository.intiTask(
+//            title = currentState.title,
+//            description = currentState.description
+//        )
+
+        val isSuccessful = createTaskUseCase.execute(task = currentState)
 
         if (isSuccessful) {
             store.dispatch(TaskAction.TaskCreationCompleted)
+
         } else {
             store.dispatch(TaskAction.TaskCreationFailed(Error(Throwable())))
         }

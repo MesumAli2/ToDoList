@@ -17,8 +17,11 @@
 package com.mesum.todolist.util
 
 import android.annotation.SuppressLint
+import android.content.Context
+import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.mesum.todolist.data.local.TaskStateSerializer
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
@@ -34,3 +37,5 @@ fun addFragmentToActivity(
     commit()
   }
 }
+
+val Context.dataStore by dataStore("tasks.json", TaskStateSerializer)

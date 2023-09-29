@@ -1,9 +1,4 @@
-package com.mesum.todolist.redux.middleware
-
-import com.mesum.todolist.redux.action.Action
-import com.mesum.todolist.redux.state.State
-import com.mesum.todolist.redux.store.Store
-import kotlinx.coroutines.Dispatchers
+package com.mesum.todolist.redux
 
 /**
  * A [Middleware] is any class that deals with side effects of actions, such as logging or

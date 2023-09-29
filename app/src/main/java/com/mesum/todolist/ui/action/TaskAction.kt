@@ -1,6 +1,6 @@
 package com.mesum.todolist.ui.action
 
-import com.mesum.todolist.redux.action.Action
+import com.mesum.todolist.redux.Action
 
 /**
  *  Action that can be tri ggered from the AddTaskScreen

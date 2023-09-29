@@ -1,4 +1,4 @@
-package com.mesum.todolist.redux.action
+package com.mesum.todolist.redux
 
 /**
  * This empty interface is used to clearly define

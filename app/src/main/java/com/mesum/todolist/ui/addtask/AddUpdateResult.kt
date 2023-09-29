@@ -1,7 +1,7 @@
 package com.mesum.todolist.ui.addtask
 
 import com.mesum.todolist.data.Task
-import com.mesum.todolist.redux.result.Result
+import com.mesum.todolist.redux.Result
 
 sealed class AddUpdateResult : Result {
     sealed class PopulateTaskResult : AddUpdateResult() {

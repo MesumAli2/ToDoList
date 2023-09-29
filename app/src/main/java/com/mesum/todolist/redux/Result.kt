@@ -1,4 +1,4 @@
-package com.mesum.todolist.redux.result
+package com.mesum.todolist.redux
 
 /**
  * Immutable object resulting of a processed business logic.

@@ -7,36 +7,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.datastore.dataStore
+import androidx.fragment.app.viewModels
+
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.mesum.todolist.R
-import com.mesum.todolist.TaskViewState
 import com.mesum.todolist.data.Task
-import com.mesum.todolist.data.TaskStateSerializer
-import com.mesum.todolist.data.Tasks
-import com.mesum.todolist.data.appStartUpParamsDataStore
+import com.mesum.todolist.data.local.TaskStateSerializer
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
-import kotlinx.collections.immutable.PersistentList
-import kotlinx.collections.immutable.persistentListOf
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
-import org.intellij.lang.annotations.Language
 
-val Context.dataStore by dataStore("tasks.json", TaskStateSerializer)
+//val Context.dataStore by dataStore("tasks.json", TaskStateSerializer)
+@AndroidEntryPoint
 class AddTaskFragment : Fragment() {
+
+    private val viewModel: AddTaskViewModel by viewModels()
 
     private var _binding: FragmentAddUpdateTaskBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AddTaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[AddTaskViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[AddTaskViewModel::class.java]
 
 
         // Subscribe to the view-model's view state stateFlow when the view is resumed.
@@ -76,9 +72,9 @@ class AddTaskFragment : Fragment() {
 
         lifecycleScope.launch {
 
-            requireActivity().dataStore.data.collectLatest {
-                Log.d("TasksList", it.toString())
-            }
+//            requireActivity().dataStore.data.collectLatest {
+//                Log.d("TasksList", it.toString())
+//            }
         }
 
         lifecycleScope.launch {
@@ -87,14 +83,7 @@ class AddTaskFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
 
-                createTask(Task(title = binding.addTaskTitle.text.toString(), description = binding.addTaskDescription.text.toString()))
-//                requireActivity().appStartUpParamsDataStore.updateData {
-//                    it.toBuilder().setTitle(binding.addTaskTitle.text.toString()).build()
-//                }
-//                requireActivity().appStartUpParamsDataStore.updateData { preferences ->
-//                    preferences.toBuilder()
-//                        .setDescription(binding.addTaskDescription.text.toString()).build()
-//                }
+
 
             }
 
@@ -119,43 +108,43 @@ class AddTaskFragment : Fragment() {
 
 
 
-    private suspend fun updateTaskTitle(oldTitle: String, newTitle: String) {
-        requireActivity().dataStore.updateData { currentData ->
-            val updatedTasks = currentData.tasks.toMutableList()
+//    private suspend fun updateTaskTitle(oldTitle: String, newTitle: String) {
+//        requireActivity().dataStore.updateData { currentData ->
+//            val updatedTasks = currentData.tasks.toMutableList()
+//
+//            for (index in updatedTasks.indices) {
+//                if (updatedTasks[index].title == oldTitle) {
+//                    updatedTasks[index] = updatedTasks[index].copy(title = newTitle)
+//                    break // Break out of the loop after updating the first matching task
+//                }
+//            }
+//
+//            currentData.copy(tasks = updatedTasks)
+//        }
+//    }
 
-            for (index in updatedTasks.indices) {
-                if (updatedTasks[index].title == oldTitle) {
-                    updatedTasks[index] = updatedTasks[index].copy(title = newTitle)
-                    break // Break out of the loop after updating the first matching task
-                }
-            }
-
-            currentData.copy(tasks = updatedTasks)
-        }
-    }
-
-    private suspend fun toggleTaskCompletion(title: String) {
-        requireActivity().dataStore.updateData { currentData ->
-            val updatedTasks = currentData.tasks.toMutableList()
-
-            for (index in updatedTasks.indices) {
-                if (updatedTasks[index].title == title) {
-                    val updatedTask = updatedTasks[index].copy(isCompleted = !updatedTasks[index].isCompleted)
-                    updatedTasks[index] = updatedTask
-                    break // Break out of the loop after updating the first matching task
-                }
-            }
-
-            currentData.copy(tasks = updatedTasks)
-        }
-    }
-    private suspend fun createTask(task: Task) {
-        requireActivity().dataStore.updateData { currentData ->
-            val updatedTasks = currentData.tasks.toMutableList()
-            updatedTasks.add(task)
-            currentData.copy(tasks = updatedTasks)
-        }
-    }
+//    private suspend fun toggleTaskCompletion(title: String) {
+//        requireActivity().dataStore.updateData { currentData ->
+//            val updatedTasks = currentData.tasks.toMutableList()
+//
+//            for (index in updatedTasks.indices) {
+//                if (updatedTasks[index].title == title) {
+//                    val updatedTask = updatedTasks[index].copy(isCompleted = !updatedTasks[index].isCompleted)
+//                    updatedTasks[index] = updatedTask
+//                    break // Break out of the loop after updating the first matching task
+//                }
+//            }
+//
+//            currentData.copy(tasks = updatedTasks)
+//        }
+//    }
+//    private suspend fun createTask(task: Task) {
+//        requireActivity().dataStore.updateData { currentData ->
+//            val updatedTasks = currentData.tasks.toMutableList()
+//            updatedTasks.add(task)
+//            currentData.copy(tasks = updatedTasks)
+//        }
+//    }
 
 
 

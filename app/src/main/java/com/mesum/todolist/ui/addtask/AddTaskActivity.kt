@@ -8,7 +8,9 @@ import androidx.core.view.WindowCompat
 import com.mesum.todolist.R
 import com.mesum.todolist.databinding.ActivityAddUpdateTaskBinding
 import com.mesum.todolist.util.addFragmentToActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddUpdateTaskBinding

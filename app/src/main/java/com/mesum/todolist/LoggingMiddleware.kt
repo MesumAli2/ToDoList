@@ -1,10 +1,10 @@
 package com.mesum.todolist
 
 import android.util.Log
-import com.mesum.todolist.redux.action.Action
-import com.mesum.todolist.redux.middleware.Middleware
-import com.mesum.todolist.redux.state.State
-import com.mesum.todolist.redux.store.Store
+import com.mesum.todolist.redux.Action
+import com.mesum.todolist.redux.Middleware
+import com.mesum.todolist.redux.State
+import com.mesum.todolist.redux.Store
 
 /**
  * This [Middleware] is responsible for logging every [Action] that is processed to the Logcat, so

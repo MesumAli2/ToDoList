@@ -1,11 +1,13 @@
 package com.mesum.todolist.ui.addtask
 
-import com.mesum.todolist.redux.state.State
+import com.mesum.todolist.redux.State
+import java.util.UUID
 
 /**
  * implements state that describes the configuration AddTask Screen
  */
 data class AddTaskViewState(
+    val id : String = "",
     val isEmpty: Boolean ,
     val isSaved: Boolean ,
     val title: String,
@@ -15,11 +17,13 @@ data class AddTaskViewState(
     val priority : Int ,
     val creatingTask : Boolean ,
     val showProgressBar: Boolean ,
+    val isCompleted: Boolean,
     val error: String?
 ) : State {
     companion object {
         fun idle(): AddTaskViewState {
             return AddTaskViewState(
+                id = "",
                 title = "",
                 description = "",
                 error = null,
@@ -30,6 +34,7 @@ data class AddTaskViewState(
                 priority = 0,
                 creatingTask = false,
                 showProgressBar = false,
+                isCompleted = false
 
             )
         }

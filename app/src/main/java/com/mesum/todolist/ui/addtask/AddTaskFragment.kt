@@ -18,6 +18,8 @@ import com.mesum.todolist.data.Task
 import com.mesum.todolist.data.local.TaskStateSerializer
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
 import com.mesum.todolist.ui.tasks.TasksActivity
+import com.mesum.todolist.util.showDatePickerDialog
+import com.mesum.todolist.util.showTimePickerDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -71,6 +73,25 @@ class AddTaskFragment : Fragment() {
         binding.addTaskDescription.doOnTextChanged { text, _, _, _ ->
             viewModel.taskDescriptionChanged(text.toString().orEmpty())
         }
+        binding.datePickerActions.setOnClickListener {
+            it.showDatePickerDialog(requireActivity()) { selectedDate ->
+                binding.datePickerActions.setText(selectedDate)
+            }
+            binding.timeLl.visibility = View.VISIBLE
+        }
+
+        binding.timepickerActions.setOnClickListener {
+            // Handle the selected time here
+            // 'selectedTime' contains the selected time in the "HH:mm" format
+            // You can update your UI or perform any other action with it
+            it.showTimePickerDialog(requireActivity()){ selectedTime ->
+                binding.timepickerActions.setText(selectedTime)
+
+            }
+
+        }
+
+
 
         lifecycleScope.launch {
 

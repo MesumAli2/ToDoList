@@ -14,5 +14,19 @@
     <string name="title_hint">Title</string>
     <string name="description_hint">Enter your TO-DO here.</string>
     <string name="create">Create</string>
+    <string name="what_is_to_be_done">What is to be done</string>
+    <string name="due_date">Due Date</string>
+    <string name="date_not_set">Date not set</string>
+    <string name="notifications">Notifications</string>
+    <string name="no_notifications_if_date_is_not_set">No notifications if date is not set</string>
+    <string name="choose_category">Choose a Category</string>
+    <string name="time_not_set_all_day">Time not set(all day)</string>
+    <string-array name="spinner_options">
+            <item>Work</item>
+            <item>Personal</item>
+            <item>Shopping</item>
+            <item>Wishlist</item>
+            <item>Outing</item>
+    </string-array>
 
 </resources>

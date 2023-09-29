@@ -15,46 +15,221 @@
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/add_task_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/title_hint"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-        <EditText
-            android:id="@+id/add_task_description"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:gravity="top"
-            android:hint="@string/description_hint" />
-
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/create_task_24" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create" />
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/what_is_to_be_done"
+                />
+
+            <EditText
+                android:id="@+id/add_task_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_hint"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/due_date"
+                android:layout_marginTop="16dp"
+                />
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/date_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <EditText
+                android:id="@+id/date_picker_actions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:ems="10"
+                android:layout_weight="0.8"
+                android:layout_marginEnd="12dp"
+                android:hint="@string/date_not_set"
+                android:clickable="false"
+                android:focusable="false"
+                />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/calendar_24"
+                    android:layout_marginTop="4dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/time_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
+
+                <EditText
+                    android:id="@+id/timepicker_actions"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_weight="0.8"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/time_not_set_all_day"
+                    android:focusable="false"
+                    android:clickable="false"
+                    />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/tme_picker_24"
+                    android:layout_marginTop="4dp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notifications"
+                android:autoLink="web"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_notifications_if_date_is_not_set"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_options"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:layoutDirection="locale"
+                android:prompt="@string/choose_category"
+                android:layout_weight="0.8"
+                />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/category_selector_24"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    />
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/add_task_description"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:gravity="top"
+                android:hint="@string/description_hint" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_high_priority"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="High priority"
+                        />
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_medium_priority"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Medium priority"
+                        />
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rb_low_priority"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Low priority"
+                        />
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
 

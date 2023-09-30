@@ -13,7 +13,7 @@ data class Task(
     val description: String = "",
     val dueDate: String? = "",
     val category: String = "",
-    val priority: Int = 0,
+    val priority: String = "",
     val isCompleted: Boolean = false
 ){
     val titleForList =

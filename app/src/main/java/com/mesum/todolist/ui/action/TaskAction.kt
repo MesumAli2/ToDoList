@@ -10,7 +10,7 @@ sealed class TaskAction : Action {
     data class TaskDescriptionChanged(val newDescription: String) : TaskAction()
     data class TaskDueDateChanged(val newDueDate: String) : TaskAction()
     data class TaskCategoryChanged(val newCategory: String) : TaskAction()
-    data class TaskPriorityChanged(val newPriority: Int) : TaskAction()
+    data class TaskPriorityChanged(val newPriority: String) : TaskAction()
 
     // For task creation
     object CreateTaskButtonClicked : TaskAction()

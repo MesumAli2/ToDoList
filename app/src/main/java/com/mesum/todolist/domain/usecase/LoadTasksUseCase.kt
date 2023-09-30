@@ -9,8 +9,6 @@ class LoadTasksUseCase @Inject constructor(
     private val tasksRepository: TasksRepository
 ) : UseCase<Unit,MutableList<Task>>() {
     override suspend fun execute(unit: Unit): MutableList<Task> {
-        // Load tasks from your repository or data source
-        // Create a ViewTaskViewState based on the loaded tasks
         return mutableListOf()
     }
 

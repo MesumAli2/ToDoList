@@ -18,6 +18,8 @@ import com.mesum.todolist.data.Task
 import com.mesum.todolist.data.local.TaskStateSerializer
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
 import com.mesum.todolist.ui.tasks.TasksActivity
+import com.mesum.todolist.util.onItemSelected
+import com.mesum.todolist.util.onRadioButtonSelected
 import com.mesum.todolist.util.showDatePickerDialog
 import com.mesum.todolist.util.showTimePickerDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,28 +78,24 @@ class AddTaskFragment : Fragment() {
         binding.datePickerActions.setOnClickListener {
             it.showDatePickerDialog(requireActivity()) { selectedDate ->
                 binding.datePickerActions.setText(selectedDate)
+                viewModel.taskDueDateChanged(selectedDate)
             }
             binding.timeLl.visibility = View.VISIBLE
         }
 
         binding.timepickerActions.setOnClickListener {
-            // Handle the selected time here
-            // 'selectedTime' contains the selected time in the "HH:mm" format
-            // You can update your UI or perform any other action with it
             it.showTimePickerDialog(requireActivity()){ selectedTime ->
                 binding.timepickerActions.setText(selectedTime)
-
             }
-
+        }
+        binding.categorySpinner.onItemSelected { selectedCategory ->
+           viewModel.taskCategoryChanged(selectedCategory)
         }
 
-
-
-        lifecycleScope.launch {
-
-//            requireActivity().dataStore.data.collectLatest {
-//                Log.d("TasksList", it.toString())
-//            }
+        binding.radioGroupPriority.onRadioButtonSelected { selectedRadioButton ->
+            val selectedText = selectedRadioButton?.text?.toString() ?: ""
+            // Handle selectedText, even if no RadioButton is selected
+            viewModel.taskPriorityChanged(selectedText)
         }
 
         lifecycleScope.launch {

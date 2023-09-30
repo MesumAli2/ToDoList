@@ -21,6 +21,9 @@
     <string name="no_notifications_if_date_is_not_set">No notifications if date is not set</string>
     <string name="choose_category">Choose a Category</string>
     <string name="time_not_set_all_day">Time not set(all day)</string>
+    <string name="high_priority">High priority</string>
+    <string name="medium_priority">Medium priority</string>
+    <string name="low_priority">Low priority</string>
     <string-array name="spinner_options">
             <item>Work</item>
             <item>Personal</item>

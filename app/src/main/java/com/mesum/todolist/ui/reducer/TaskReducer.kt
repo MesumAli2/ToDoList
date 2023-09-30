@@ -66,7 +66,7 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
             showProgressBar = false,
             dueDate = null,
             category = "",
-            priority = 1,
+            priority = "",
             taskAdded = true
         )
 

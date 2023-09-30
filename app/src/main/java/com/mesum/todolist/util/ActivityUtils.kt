@@ -22,8 +22,12 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.text.format.DateFormat
 import android.view.View
+import android.widget.AdapterView
 import android.widget.DatePicker
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -162,4 +166,34 @@ private fun getTimeInMillis(hourOfDay: Int, minute: Int): Long {
     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
     calendar.set(Calendar.MINUTE, minute)
     return calendar.timeInMillis
+}
+
+fun AppCompatSpinner.onItemSelected(callback: (String) -> Unit) {
+    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            if (position >= 0 && position < adapter.count) {
+                val selectedItem = adapter.getItem(position).toString()
+                callback(selectedItem)
+            }
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            // Handle the case where nothing is selected (if needed)
+        }
+    }
+}
+fun RadioGroup.getSelectedRadioButton(): RadioButton? {
+    val checkedRadioButtonId = checkedRadioButtonId
+    return if (checkedRadioButtonId != -1) {
+        findViewById(checkedRadioButtonId)
+    } else {
+        null
+    }
+}
+
+fun RadioGroup.onRadioButtonSelected(callback: (RadioButton?) -> Unit) {
+    setOnCheckedChangeListener { _, checkedId ->
+        val selectedRadioButton = findViewById<RadioButton>(checkedId)
+        callback(selectedRadioButton)
+    }
 }

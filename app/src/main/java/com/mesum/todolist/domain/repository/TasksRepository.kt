@@ -6,5 +6,4 @@ import java.util.concurrent.Flow
 
 interface TasksRepository {
     suspend fun loadTasks(): MutableList<Task>
-    // You can add other methods for task-related operations here
 }

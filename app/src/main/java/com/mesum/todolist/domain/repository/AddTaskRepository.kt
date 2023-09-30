@@ -5,7 +5,6 @@ import com.mesum.todolist.domain.entity.AddTask
 import com.mesum.todolist.ui.addtask.AddTaskViewState
 
 interface AddTaskRepository {
-
     suspend fun createTask(task : AddTaskViewState) : Boolean
 
 }

@@ -54,7 +54,7 @@ class AddTaskViewModel @Inject constructor(
         }
     }
 
-    fun taskPriorityChanged(newPriority: Int) {
+    fun taskPriorityChanged(newPriority: String) {
         val action = TaskAction.TaskPriorityChanged(newPriority)
         viewModelScope.launch {
             store.dispatch(action)

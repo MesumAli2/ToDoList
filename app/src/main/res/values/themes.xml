@@ -2,9 +2,15 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ToDoList" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/colorPrimary</item>
 
     </style>
 
     <style name="Theme.ToDoList" parent="Base.Theme.ToDoList" />
+    <!-- Light Theme Toolbar Style -->
+    <style name="LightThemeToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <!-- Add other toolbar customizations for light mode -->
+    </style>
+
 </resources>

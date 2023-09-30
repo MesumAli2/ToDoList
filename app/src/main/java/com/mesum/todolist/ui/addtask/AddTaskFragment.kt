@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.datastore.dataStore
 import androidx.fragment.app.viewModels
@@ -70,6 +71,8 @@ class AddTaskFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
         binding.addTaskTitle.doOnTextChanged { text, _, _, _ ->
             viewModel.taskTitleChanged(text.toString().orEmpty())
         }

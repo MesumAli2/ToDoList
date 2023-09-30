@@ -1,6 +1,7 @@
 package com.mesum.todolist.ui.tasks
 
 import android.content.Context
+import android.view.View
 import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
 import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
 import com.mesum.todolist.redux.Middleware
@@ -31,6 +32,9 @@ class ViewingDatastoreMiddleware @Inject constructor(
                 // Handle filtering tasks by category and dispatch actions accordingly
                 // For example, you can dispatch ViewTaskAction.LoadTasks with filtered data
                 filterTasksByCategory(action.category, store)
+            }
+            is ViewTaskAction.SearchQuery -> {
+                searchQuery(store,action.query)
             }
 
 //            is ViewTaskAction.SortTasks -> {
@@ -67,6 +71,20 @@ class ViewingDatastoreMiddleware @Inject constructor(
             store.dispatch(ViewTaskAction.TaskDeletionCompleted(taskId))
         }else store.dispatch(ViewTaskAction.TaskDeletionFailed(Error(Throwable())))
     }
+
+    private suspend fun searchQuery(store: Store<ViewTaskViewState, ViewTaskAction>, query: String) {
+        val currentState = store.state.value
+        val originalTasks = currentState.allTasks // Store the original tasks
+        store.dispatch(ViewTaskAction.SearchQueryCompleted(searchedTasks = originalTasks))
+        val filteredTasks = originalTasks.filter { task ->
+            task.title.contains(query, ignoreCase = true) || // Match title (case-insensitive)
+                    task.description.contains(query, ignoreCase = true) // Match description (case-insensitive)
+        }
+        store.dispatch(ViewTaskAction.SearchQueryCompleted(searchedTasks = filteredTasks))
+
+        // After dispatching search results, clear the search by dispatching an empty list
+    }
+
 
     private suspend fun filterTasksByCategory(
         category: String,

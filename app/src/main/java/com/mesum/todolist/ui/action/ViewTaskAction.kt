@@ -24,6 +24,12 @@ sealed class ViewTaskAction : Action {
     object TaskDeletionStarted : ViewTaskAction()
     data class TaskDeletionCompleted(val taskId: String) : ViewTaskAction()
     data class TaskDeletionFailed(val error: Throwable?) : ViewTaskAction()
+    data class SearchQuery(val query: String) : ViewTaskAction()
+    data class SearchQueryCompleted(val searchedTasks: List<Task>) : ViewTaskAction()
+
+
+
+
 
 }
 

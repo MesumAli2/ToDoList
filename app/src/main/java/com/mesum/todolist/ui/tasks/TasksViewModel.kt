@@ -37,5 +37,12 @@ class TasksViewModel @Inject constructor(
         }
     }
 
+    fun searchTasks(query: String) {
+        val action = ViewTaskAction.SearchQuery(query)
+        viewModelScope.launch {
+            store.dispatch(action)
+        }
+    }
+
 
 }

@@ -28,8 +28,12 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
             }
             is ViewTaskAction.TaskDeletionFailed -> {
                 // Handle task deletion failed action here
-                currentState
+                handleFailedDelete(currentState)
             }
+            is ViewTaskAction.SearchQueryCompleted -> {
+                getSearchedTasks(action.searchedTasks, currentState)
+            }
+
             is ViewTaskAction.LoadTasksCompleted -> {
                 loadTasks(action.tasks, currentState)
             }
@@ -65,8 +69,8 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
         // Update the state with the loaded tasks
         return currentState.copy(
             allTasks = tasks,
-            completedTasks = listOf(),
-            activeTasks = listOf()
+            completedTasks = tasks.filter { it.isCompleted },
+            activeTasks = tasks.filter { !it.isCompleted }
         )
     }
 
@@ -77,6 +81,12 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
         // Update the state to indicate that a task has been selected for detailed view
         return currentState.copy(selectedTaskId = taskId)
     }
+
+    private fun getSearchedTasks(searchedTasks: List<Task>, currentState: ViewTaskViewState): ViewTaskViewState{
+       return currentState.copy(allTasks = searchedTasks, activeTasks = searchedTasks.filter
+       { !it.isCompleted }, completedTasks = searchedTasks.filter { it.isCompleted })
+    }
+
 
     private fun clearSelectedTask(currentState: ViewTaskViewState): ViewTaskViewState {
         // Clear the selected task from the state
@@ -96,6 +106,9 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
 
         return currentState.copy(allTasks = updatedTasks)
     }
+
+    private fun handleFailedDelete(currentState: ViewTaskViewState) =
+        currentState
 
 
 }

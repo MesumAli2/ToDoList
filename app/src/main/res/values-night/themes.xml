@@ -2,6 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ToDoList" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+         <item name="colorPrimary">@color/colorPrimaryDark</item>
+    </style>
+    <!-- Dark Theme Toolbar Style -->
+    <style name="DarkThemeToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <!-- Add other toolbar customizations for dark mode -->
     </style>
 </resources>

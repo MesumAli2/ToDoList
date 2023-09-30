@@ -16,18 +16,26 @@
 
 package com.mesum.todolist.util
 
+import android.Manifest.permission.POST_NOTIFICATIONS
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.text.format.DateFormat
 import android.view.View
 import android.widget.AdapterView
 import android.widget.DatePicker
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -197,3 +205,44 @@ fun RadioGroup.onRadioButtonSelected(callback: (RadioButton?) -> Unit) {
         callback(selectedRadioButton)
     }
 }
+
+
+// Step 1: Create a function to request permissions and show the alert dialog
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+fun requestNotificationPermission(context: Context, callback: () -> Unit) {
+
+    val permission = POST_NOTIFICATIONS
+    val granted = PackageManager.PERMISSION_GRANTED
+
+    if (ContextCompat.checkSelfPermission(context, permission) != granted) {
+        // Explain the purpose of the permission to the user
+        val dialog = AlertDialog.Builder(context)
+            .setTitle("Notification Permission Required")
+            .setMessage("We need permission to send task reminders.")
+            .setPositiveButton("OK") { _, _ ->
+                ActivityCompat.requestPermissions(
+                    context as Activity,
+                    arrayOf(permission),
+                    requestCode
+                )
+            }
+            .setNegativeButton("Cancel") { _, _ -> /* Handle cancellation if needed */ }
+            .create()
+
+        dialog.show()
+    } else {
+        // Permission already granted, continue with your logic
+        callback()
+    }
+}
+
+// Step 2: Create an extension function for Context
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+fun Context.requestNotificationPermissionAndExecute(callback: () -> Unit) {
+    requestNotificationPermission(this) {
+        // Permission granted or already granted, execute your logic here
+        callback()
+    }
+}
+
+ val requestCode = 98765

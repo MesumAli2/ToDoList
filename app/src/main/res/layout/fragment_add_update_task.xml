@@ -23,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:minHeight="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
                 app:title="@string/create_task"
                 app:popupTheme="@style/Base.Theme.ToDoList"/>
 

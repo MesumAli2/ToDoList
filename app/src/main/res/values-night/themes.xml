@@ -2,8 +2,19 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ToDoList" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-         <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item> <!-- Darker Blue -->
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantDark</item> <!-- Slightly darker variant of the primary color -->
+        <item name="colorAccent">@color/colorAccentDark</item> <!-- Deep Orange or Accent Color -->
+        <item name="backgroundColor">@color/colorBackgroundDark</item> <!-- Dark Gray or Near-Black Background -->
+        <item name="colorSurface">@color/colorSurfaceDark</item> <!-- Near-Black Surface -->
+        <item name="colorOnPrimary">@color/colorOnPrimaryDark</item> <!-- White text on the primary color -->
+        <item name="colorOnSecondary">@color/colorOnSecondaryDark</item> <!-- White text on the secondary color -->
+        <item name="colorOnBackground">@color/colorOnBackgroundDark</item> <!-- White text on the background -->
+        <item name="colorOnSurface">@color/colorOnSurfaceDark</item> <!-- White text on the surface -->
+        <item name="colorError">@color/colorErrorDark</item> <!-- Red for errors in dark mode -->
+        <item name="colorOnError">@color/colorOnErrorDark</item> <!-- White text on error background in dark mode -->
     </style>
+
     <!-- Dark Theme Toolbar Style -->
     <style name="DarkThemeToolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">@color/colorPrimaryDark</item>

@@ -2,14 +2,23 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ToDoList" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/colorPrimary</item>
-
+        <item name="colorPrimary">@color/colorPrimaryLight</item> <!-- Green -->
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantLight</item> <!-- Slightly darker green -->
+        <item name="colorAccent">@color/colorAccentLight</item> <!-- Accent color (can be a complementary color) -->
+        <item name="backgroundColor">@color/colorBackgroundLight</item> <!-- Light Gray or Off-White -->
+        <item name="colorSurface">@color/colorSurfaceLight</item> <!-- White -->
+        <item name="colorOnPrimary">@color/colorOnPrimaryLight</item> <!-- White text on the primary color -->
+        <item name="colorOnSecondary">@color/colorOnSecondaryLight</item> <!-- Black text on the secondary color -->
+        <item name="colorOnBackground">@color/colorOnBackgroundLight</item> <!-- Black text on the background -->
+        <item name="colorOnSurface">@color/colorOnSurfaceLight</item> <!-- Black text on the surface -->
+        <item name="colorError">@color/colorErrorLight</item> <!-- Red for errors -->
+        <item name="colorOnError">@color/colorOnErrorLight</item> <!-- White text on error background -->
     </style>
 
     <style name="Theme.ToDoList" parent="Base.Theme.ToDoList" />
     <!-- Light Theme Toolbar Style -->
     <style name="LightThemeToolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
         <!-- Add other toolbar customizations for light mode -->
     </style>
 

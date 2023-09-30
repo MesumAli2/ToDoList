@@ -14,6 +14,8 @@ import androidx.fragment.app.viewModels
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.mesum.todolist.R
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.data.local.TaskStateSerializer
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
@@ -68,7 +70,6 @@ class AddTaskFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.addTaskTitle.doOnTextChanged { text, _, _, _ ->
             viewModel.taskTitleChanged(text.toString().orEmpty())
         }
@@ -101,22 +102,13 @@ class AddTaskFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.viewState.collectLatest {
                 if (it.taskAdded){
-                    val intent = Intent(requireActivity(), TasksActivity::class.java)
-                    startActivity(intent)
-
+                    findNavController().navigate(R.id.tasksFragment)
                 }
             }
           //  updateTaskTitle("now we add iphone 5", "Iphone 14 pro Max")
         }
         binding.btnSave.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-
-
-
-            }
-
             viewModel.createTaskButtonClicked()
-            viewModel
 
         }
     }

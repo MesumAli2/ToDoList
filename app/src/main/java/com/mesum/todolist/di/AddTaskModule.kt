@@ -42,7 +42,6 @@ object AddTaskModule {
     }
 
     @Provides
-    @Singleton
     fun provideAddTaskStore(@ApplicationContext context: Context): Store<AddTaskViewState, TaskAction> {
         return Store(
             initialState = AddTaskViewState.idle(),

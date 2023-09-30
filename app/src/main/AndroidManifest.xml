@@ -21,20 +21,34 @@
             android:label="@string/title_activity_add_update_task"
             android:theme="@style/Theme.ToDoList" />
 
-        <activity
-            android:name=".ui.tasks.TasksActivity"
-            android:parentActivityName=".ui.tasks.TasksActivity"
+<!--        <activity-->
+<!--            android:name=".ui.tasks.TasksActivity"-->
+<!--            android:parentActivityName=".ui.tasks.TasksActivity"-->
+<!--            tools:ignore="UnusedAttribute"-->
+<!--            android:exported="true">-->
+<!--            &lt;!&ndash; Parent activity meta-data to support 4.0 and lower &ndash;&gt;-->
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value=".ui.tasks.TasksActivity" />-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN"/>-->
+<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
+<!--            </intent-filter>-->
+
+<!--        </activity>-->
+
+        <activity android:name=".MainActivity"
+            android:parentActivityName=".MainActivity"
             tools:ignore="UnusedAttribute"
             android:exported="true">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.tasks.TasksActivity" />
+                android:value=".MainActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
     </application>
 

@@ -25,14 +25,10 @@ import javax.inject.Inject
 class TasksViewModel @Inject constructor(
     private val store: Store<ViewTaskViewState, ViewTaskAction>,
 ) : ViewModel() {
-
-
-
     init {
         startLoadingTask()
     }
     val viewState = store.state
-
 
     private  fun startLoadingTask() {
         val action = ViewTaskAction.LoadTasksStarted
@@ -41,15 +37,12 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-
-
-    // Create a function to observe the loaded tasks
-    fun observeLoadedTasks(): Flow<List<com.mesum.todolist.data.Task>> {
-        // Replace 'viewState' with your desired state property
-        return viewState.map { it.allTasks }
+    fun markTaskAsCompleted(taskId : String){
+        val action = ViewTaskAction.TaskMarkAsCompleted(taskId)
+        viewModelScope.launch {
+            store.dispatch(action)
+        }
     }
-
-
 
 
 }

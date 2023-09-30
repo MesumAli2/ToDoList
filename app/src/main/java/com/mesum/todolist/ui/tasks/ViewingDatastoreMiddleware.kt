@@ -44,6 +44,9 @@ class ViewingDatastoreMiddleware @Inject constructor(
                 // Then dispatch a ViewTaskAction.ClearSelectedTask if needed
                 // store.dispatch(ViewTaskAction.ClearSelectedTask)
             }
+            is ViewTaskAction.TaskMarkAsCompleted ->{
+                loadTasksUseCase.execute(action.taskId)
+            }
             // Handle other actions related to viewing tasks here
             else -> {}
         }

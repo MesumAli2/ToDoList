@@ -11,18 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mesum.todolist.R
-import com.mesum.todolist.data.Tasks
 import com.mesum.todolist.databinding.FragmentTaskBinding
 import com.mesum.todolist.ui.adapter.TaskListAdapter
 import com.mesum.todolist.ui.addtask.AddTaskActivity
-import com.mesum.todolist.util.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.launch
 
 
@@ -30,10 +24,9 @@ import kotlinx.coroutines.launch
 class TasksFragment : Fragment() {
 
 
-    private val viewMode : TasksViewModel by viewModels()
+    private val viewModel : TasksViewModel by viewModels()
     private  var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,21 +37,20 @@ class TasksFragment : Fragment() {
         return binding.root
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab_add_task)
 
         fab.setOnClickListener { showAddTask() }
-        val adapter = TaskListAdapter()
-
+        val adapter = TaskListAdapter{ clickedTask ->
+            viewModel.markTaskAsCompleted(clickedTask.id)
+        }
         lifecycleScope.launch(Dispatchers.IO) {
-            viewMode.viewState.collect {
+            viewModel.viewState.collect {
                 Log.d("TasksViewState", it.toString())
                 adapter.submitList(it.allTasks.reversed())
 
             }
-
         }
         binding.recyclerViewTask.adapter = adapter
     }

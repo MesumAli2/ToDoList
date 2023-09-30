@@ -3,8 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="16dp">
+
+    <CheckBox
+        android:id="@+id/complete_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/textTitle"
@@ -20,6 +31,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="Task Description" />
+    </LinearLayout>
 
     <!-- Add other views for due date, category, priority, etc., as needed -->
 

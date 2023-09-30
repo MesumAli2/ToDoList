@@ -11,6 +11,10 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
                 // Handle the start of task loading and update the state accordingly
                 startLoadingTasks(currentState)
             }
+            is ViewTaskAction.TaskMarkAsCompleted -> {
+
+                markTaskAsCompleted(action, currentState)
+            }
 
 //            is ViewTaskAction.FilterTasksByCategory -> {
 //                // Handle filtering tasks by category and update the state accordingly
@@ -38,7 +42,16 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
         }
     }
 
-        private fun startLoadingTasks(currentState: ViewTaskViewState): ViewTaskViewState {
+    private fun markTaskAsCompleted(
+        action: ViewTaskAction.TaskMarkAsCompleted,
+        currentState: ViewTaskViewState
+    ): ViewTaskViewState {
+
+        action.taskId
+        return currentState
+    }
+
+    private fun startLoadingTasks(currentState: ViewTaskViewState): ViewTaskViewState {
                 // Update the state to indicate that task loading has started
             return currentState.copy(loadingTasks = true)
     }

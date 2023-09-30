@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class LoadTasksUseCase @Inject constructor(
     private val tasksRepository: TasksRepository
-) : UseCase<Unit,MutableList<Task>>() {
-    override suspend fun execute(unit: Unit): MutableList<Task> {
-        return mutableListOf()
+) : UseCase<String,Boolean>() {
+    override suspend fun execute(taskID: String): Boolean{
+        return tasksRepository.markCompleted(taskID = taskID)
     }
 
 }

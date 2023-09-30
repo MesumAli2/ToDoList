@@ -6,4 +6,5 @@ import java.util.concurrent.Flow
 
 interface TasksRepository {
     suspend fun loadTasks(): MutableList<Task>
+    suspend fun markCompleted(taskID : String): Boolean
 }

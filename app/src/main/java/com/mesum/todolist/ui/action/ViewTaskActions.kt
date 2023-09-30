@@ -17,11 +17,13 @@ sealed class ViewTaskAction : Action {
 
     // Action to sort tasks
     // data class SortTasks(val sortBy: SortBy) : ViewTaskAction()
-
     // Action to select a task for detailed view
     data class SelectTask(val taskId: String) : ViewTaskAction()
 
     // Action to clear the selected task
     object ClearSelectedTask : ViewTaskAction()
+
+    data class TaskMarkAsCompleted(val taskId: String) : ViewTaskAction()
+
 }
 

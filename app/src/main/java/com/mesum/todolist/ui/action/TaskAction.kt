@@ -24,9 +24,5 @@ sealed class TaskAction : Action {
 //    object TaskUpdateStarted : TaskAction()
 //    data class TaskUpdateFailed(val error: Throwable?) : TaskAction()
 //
-//    // For task deletion
-//    data class DeleteTaskButtonClicked(val taskId: String) : TaskAction()
-//    object TaskDeletionStarted : TaskAction()
-//    object TaskDeletionCompleted : TaskAction()
-//    data class TaskDeletionFailed(val error: Throwable?) : TaskAction()
+
 }

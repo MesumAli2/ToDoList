@@ -24,6 +24,8 @@
     <string name="high_priority">High priority</string>
     <string name="medium_priority">Medium priority</string>
     <string name="low_priority">Low priority</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
     <string-array name="spinner_options">
             <item>Work</item>
             <item>Personal</item>

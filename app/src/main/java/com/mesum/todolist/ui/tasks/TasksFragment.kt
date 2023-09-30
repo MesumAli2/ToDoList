@@ -42,9 +42,15 @@ class TasksFragment : Fragment() {
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab_add_task)
 
         fab.setOnClickListener { showAddTask() }
-        val adapter = TaskListAdapter{ clickedTask ->
-            viewModel.markTaskAsCompleted(clickedTask.id)
-        }
+         val adapter = TaskListAdapter(
+            onClickCmptTask = { task ->
+                viewModel.markTaskAsCompleted(task.id)
+            },
+            onDeleteTask = { task ->
+                viewModel.deleteTask(task.id)
+            }
+        )
+
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.viewState.collect {
                 Log.d("TasksViewState", it.toString())

@@ -24,7 +24,7 @@ data class AddTaskViewState(
     companion object {
         fun idle(): AddTaskViewState {
             return AddTaskViewState(
-                id = "",
+                id = UUID.randomUUID().toString(),
                 title = "",
                 description = "",
                 error = null,

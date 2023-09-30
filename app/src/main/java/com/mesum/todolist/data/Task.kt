@@ -1,7 +1,5 @@
 package com.mesum.todolist.data
 
-import kotlinx.collections.immutable.PersistentList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.serialization.Serializable
 import java.util.UUID
 

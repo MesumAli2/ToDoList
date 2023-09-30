@@ -1,9 +1,6 @@
 package com.mesum.todolist.ui.action
 import com.mesum.todolist.data.Task
-import com.mesum.todolist.data.Tasks
 import com.mesum.todolist.redux.Action
-import com.mesum.todolist.ui.tasks.ViewTaskViewState
-import kotlinx.coroutines.flow.Flow
 
 sealed class ViewTaskAction : Action {
     // Action to indicate the start of task loading
@@ -22,8 +19,11 @@ sealed class ViewTaskAction : Action {
 
     // Action to clear the selected task
     object ClearSelectedTask : ViewTaskAction()
-
     data class TaskMarkAsCompleted(val taskId: String) : ViewTaskAction()
+    data class DeleteTaskButtonClicked(val taskId: String) : ViewTaskAction()
+    object TaskDeletionStarted : ViewTaskAction()
+    data class TaskDeletionCompleted(val taskId: String) : ViewTaskAction()
+    data class TaskDeletionFailed(val error: Throwable?) : ViewTaskAction()
 
 }
 

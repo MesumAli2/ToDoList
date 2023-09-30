@@ -1,4 +1,4 @@
-package com.mesum.todolist.data
+package com.mesum.todolist.data.local
 
 import android.content.Context
 import android.util.Log
@@ -22,13 +22,10 @@ class AddTaskRepositoryImpl @Inject constructor(
                 val updatedTasks = currentData.tasks.toMutableList()
                 updatedTasks.add(addTaskEntityMapper.map(task))
                 Log.d("TaskAdded", currentData.toString())
-
                 currentData.copy(tasks = updatedTasks)
             }
-
             // Introduce a delay of 700 million milliseconds (700,000 seconds)
             delay(700)
-
             // If the updateData function doesn't throw an exception, it was successful
             true
         } catch (e: Exception) {

@@ -11,11 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="0.2"
          />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="0.6"
+        android:layout_marginStart="8dp"
+        >
 
     <TextView
         android:id="@+id/textTitle"
@@ -23,15 +27,23 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Task Title" />
+        android:text="@string/task_title" />
 
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Task Description" />
+        android:text="@string/task_description" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/delete_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_weight="0.2"
+        android:src="@drawable/delete_task_24"
+        />
 
     <!-- Add other views for due date, category, priority, etc., as needed -->
 

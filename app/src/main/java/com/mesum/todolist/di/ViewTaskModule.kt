@@ -2,9 +2,10 @@ package com.mesum.todolist.di
 
 import android.content.Context
 import com.mesum.todolist.LoggingMiddleware
-import com.mesum.todolist.data.TasksRepositoryImpl
+import com.mesum.todolist.data.local.TasksRepositoryImpl
 import com.mesum.todolist.domain.repository.TasksRepository
-import com.mesum.todolist.domain.usecase.LoadTasksUseCase
+import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
+import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.ViewTaskAction
 import com.mesum.todolist.ui.reducer.ViewTaskReducer
@@ -24,24 +25,31 @@ object ViewTaskModule {
     fun provideTaskRepository(@ApplicationContext context: Context): TasksRepository {
         return TasksRepositoryImpl(context)
     }
+
     @Provides
-    fun provideLoadTasksUseCase(@ApplicationContext context: Context): LoadTasksUseCase {
-        return LoadTasksUseCase(provideTaskRepository(context))
+    fun provideLoadTasksUseCase(@ApplicationContext context: Context): MarkTasksCmptUseCase {
+        return MarkTasksCmptUseCase(provideTaskRepository(context))
+    }
+    @Provides
+    fun provideDeleteTaskUseCase(@ApplicationContext context: Context): DeleteTaskUseCase {
+        return DeleteTaskUseCase(provideTaskRepository(context))
     }
 
     @Provides
     fun provideViewTaskStore(
-        loadTasksUseCase: LoadTasksUseCase,
-        @ApplicationContext context: Context
-    ): Store<ViewTaskViewState, ViewTaskAction> {
+        @ApplicationContext context: Context,
+        markTasksCmptUseCase: MarkTasksCmptUseCase,
+        deleteTaskUseCase: DeleteTaskUseCase
+        ): Store<ViewTaskViewState, ViewTaskAction> {
         return Store(
             initialState = ViewTaskViewState.idle(),
             reducer = ViewTaskReducer(),
             middlewares = listOf(
                 LoggingMiddleware(),
                 ViewingDatastoreMiddleware(
-                    loadTasksUseCase = loadTasksUseCase,
-                    context = context
+                    markTasksCmptUseCase = markTasksCmptUseCase,
+                    context = context,
+                    deleteTaskUseCase = deleteTaskUseCase
                 )
             )
         )

@@ -5,6 +5,3 @@ abstract class UseCase<I, O> {
 }
 
 
-abstract class UseCases<I> {
-    abstract suspend fun execute(): I
-}

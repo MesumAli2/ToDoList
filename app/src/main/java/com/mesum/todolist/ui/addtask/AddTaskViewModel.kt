@@ -2,13 +2,9 @@ package com.mesum.todolist.ui.addtask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mesum.todolist.CreateTaskService
-import com.mesum.todolist.CreatingDatastoreMiddleware
-import com.mesum.todolist.LoggingMiddleware
 import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
-import com.mesum.todolist.ui.reducer. TaskReducer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,18 +19,10 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
-    private val createTaskUseCase: CreateTaskUseCase
-) : ViewModel(){
-    private val store = Store(
-        initialState = AddTaskViewState.idle(),
-        reducer = TaskReducer(),
-        middlewares = listOf(
-            LoggingMiddleware(),
-            CreatingDatastoreMiddleware(
-                createTaskUseCase = createTaskUseCase
-            )
-        )
-    )
+    private val createTaskUseCase: CreateTaskUseCase,
+    private val store: Store<AddTaskViewState, TaskAction>
+) : ViewModel() {
+
 
     val viewState: StateFlow<AddTaskViewState> = store.state
 
@@ -43,7 +31,6 @@ class AddTaskViewModel @Inject constructor(
         viewModelScope.launch {
             store.dispatch(action)
         }
-
     }
 
     fun taskDescriptionChanged(newDescription: String) {
@@ -81,6 +68,5 @@ class AddTaskViewModel @Inject constructor(
         }
     }
 
-    // You can define the other action methods in a similar manner
 
 }

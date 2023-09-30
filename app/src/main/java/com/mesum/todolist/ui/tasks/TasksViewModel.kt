@@ -22,29 +22,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TasksViewModel@Inject constructor(
-
-     loadTasksUseCase: LoadTasksUseCase,
-     @ApplicationContext context: Context
-
+class TasksViewModel @Inject constructor(
+    private val store: Store<ViewTaskViewState, ViewTaskAction>,
 ) : ViewModel() {
+
+
+
     init {
         startLoadingTask()
     }
-
-    private val store = Store(
-        initialState = ViewTaskViewState.idle(), // Use ViewTaskViewState for viewing tasks
-        reducer = ViewTaskReducer(), // Use ViewTaskReducer for viewing tasks
-        middlewares = listOf(
-            LoggingMiddleware<ViewTaskViewState, ViewTaskAction>(), // Use ViewTaskViewState and ViewTaskAction here
-            ViewingDatastoreMiddleware(
-                loadTasksUseCase = loadTasksUseCase,
-                context = context
-
-            )
-        )
-    )
-
     val viewState = store.state
 
 

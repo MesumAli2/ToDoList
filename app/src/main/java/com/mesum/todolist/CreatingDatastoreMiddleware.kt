@@ -8,8 +8,9 @@ import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
 import com.mesum.todolist.ui.addtask.AddTaskViewState
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class CreatingDatastoreMiddleware(
+class CreatingDatastoreMiddleware @Inject constructor(
     private val createTaskUseCase: CreateTaskUseCase,
 ) : Middleware<AddTaskViewState, TaskAction> {
 
@@ -38,10 +39,6 @@ class CreatingDatastoreMiddleware(
     ) {
         store.dispatch(TaskAction.TaskCreationStarted)
 
-//        val isSuccessful = addTaskRepository.intiTask(
-//            title = currentState.title,
-//            description = currentState.description
-//        )
 
         val isSuccessful = createTaskUseCase.execute(task = currentState)
 

@@ -73,11 +73,10 @@ class ViewingDatastoreMiddleware @Inject constructor(
     }
 
     private suspend fun searchQuery(store: Store<ViewTaskViewState, ViewTaskAction>, query: String) {
-        val currentState = store.state.value
-        val originalTasks = currentState.allTasks // Store the original tasks
+        val originalTasks = context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()
         store.dispatch(ViewTaskAction.SearchQueryCompleted(searchedTasks = originalTasks))
         val filteredTasks = originalTasks.filter { task ->
-            task.title.contains(query, ignoreCase = true) || // Match title (case-insensitive)
+            task.title.contains(query, ignoreCase = true) ||
                     task.description.contains(query, ignoreCase = true) // Match description (case-insensitive)
         }
         store.dispatch(ViewTaskAction.SearchQueryCompleted(searchedTasks = filteredTasks))

@@ -1,5 +1,6 @@
 package com.mesum.todolist.ui.reducer
 
+import android.view.View
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.redux.Reducer
 import com.mesum.todolist.ui.action.ViewTaskAction
@@ -30,8 +31,15 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
                 // Handle task deletion failed action here
                 handleFailedDelete(currentState)
             }
+
+            is ViewTaskAction.TasksSorted ->{
+                sortTasks(action.task, currentState)
+            }
             is ViewTaskAction.SearchQueryCompleted -> {
                 getSearchedTasks(action.searchedTasks, currentState)
+            }
+            is ViewTaskAction.TasksFiltered -> {
+                filterTasks(action.task, currentState)
             }
 
             is ViewTaskAction.LoadTasksCompleted -> {
@@ -87,6 +95,15 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
        { !it.isCompleted }, completedTasks = searchedTasks.filter { it.isCompleted })
     }
 
+    private fun filterTasks(tasks: List<Task>, currentState: ViewTaskViewState): ViewTaskViewState{
+        return currentState.copy(allTasks = tasks,activeTasks = tasks.filter
+        { !it.isCompleted }, completedTasks = tasks.filter { it.isCompleted })
+    }
+
+    private fun sortTasks(tasks: List<Task>, currentState: ViewTaskViewState): ViewTaskViewState{
+        return currentState.copy(allTasks = tasks,activeTasks = tasks.filter
+        { !it.isCompleted }, completedTasks = tasks.filter { it.isCompleted })
+    }
 
     private fun clearSelectedTask(currentState: ViewTaskViewState): ViewTaskViewState {
         // Clear the selected task from the state

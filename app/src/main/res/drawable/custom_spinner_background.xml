@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Default state -->
+    <item android:state_enabled="true" android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!-- Background color when the spinner is not pressed -->
+            <solid android:color="@color/custom_spinner_background_color_normal" />
+            <!-- Rounded corners -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Pressed state -->
+    <item android:state_enabled="true" android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!-- Background color when the spinner is pressed -->
+            <solid android:color="@color/custom_spinner_background_color_pressed" />
+            <!-- Rounded corners -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Disabled state -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <!-- Background color when the spinner is disabled -->
+            <solid android:color="@color/custom_spinner_background_color_disabled" />
+            <!-- Rounded corners -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</selector>

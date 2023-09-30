@@ -13,4 +13,21 @@
         <!-- Add other toolbar customizations for light mode -->
     </style>
 
+    <style name="CustomSpinnerStyle">
+        <!-- Customize the background color -->
+        <!-- Customize the text appearance -->
+        <item name="android:textAppearance">@style/CustomSpinnerTextAppearance</item>
+        <!-- Customize the dropdown selector -->
+        <item name="android:popupBackground">@drawable/custom_spinner_dropdown_selector</item>
+        <!-- Customize other attributes as needed -->
+    </style>
+
+    <style name="CustomSpinnerTextAppearance" parent="@android:style/TextAppearance.Widget.TextView.SpinnerItem">
+        <!-- Customize text color, size, and other text attributes -->
+        <item name="android:textColor">@color/custom_spinner_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <!-- Add more text appearance attributes as needed -->
+    </style>
+
+
 </resources>

@@ -4,4 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#121212</color>
     <color name="colorPrimary">#F5F5F5</color>
+    <color name="custom_spinner_background_color_normal">#ECECEC</color>
+    <color name="custom_spinner_background_color_pressed">#D1D1D1</color>
+    <color name="custom_spinner_background_color_disabled">#F0F0F0</color>
+    <color name="custom_spinner_dropdown_background_color">#FFC107</color>
+    <color name="custom_spinner_dropdown_arrow_color">#FFC107</color>
+    <color name="custom_spinner_text_color">#FFC107</color>
+
 </resources>

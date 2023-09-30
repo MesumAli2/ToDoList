@@ -12,6 +12,11 @@ sealed class ViewTaskAction : Action {
     // Action to filter tasks by category
     data class FilterTasksByCategory(val category: String) : ViewTaskAction()
 
+    data class TasksFiltered(val task: List<Task>) : ViewTaskAction()
+
+    data class TasksSorted(val task: List<Task>) : ViewTaskAction()
+
+
     // Action to sort tasks
     // data class SortTasks(val sortBy: SortBy) : ViewTaskAction()
     // Action to select a task for detailed view
@@ -27,8 +32,9 @@ sealed class ViewTaskAction : Action {
     data class SearchQuery(val query: String) : ViewTaskAction()
     data class SearchQueryCompleted(val searchedTasks: List<Task>) : ViewTaskAction()
 
+    data class SortTasks(val sortBy: String) : ViewTaskAction() {
 
-
+    }
 
 
 }

@@ -35,7 +35,19 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="@string/task_description" />
+
+        <TextView
+            android:id="@+id/task_category_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:layout_marginStart="2dp"
+            android:text="@string/task_category"
+            />
     </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/delete_iv"

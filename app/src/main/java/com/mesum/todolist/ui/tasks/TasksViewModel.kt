@@ -44,5 +44,20 @@ class TasksViewModel @Inject constructor(
         }
     }
 
+    fun categorySelected(selectedCategory: String) {
+        val action = ViewTaskAction.FilterTasksByCategory(selectedCategory)
+        viewModelScope.launch {
+            store.dispatch(action)
+        }
+
+    }
+
+    fun sortTasks(sortBy: String) {
+        val action = ViewTaskAction.SortTasks(sortBy)
+        viewModelScope.launch{
+            store.dispatch(action)
+    }
+    }
+
 
 }

@@ -63,8 +63,8 @@ To get started with the Todo List Application, follow these steps:
 3. Build and run the application.
 
 4. Explore the features.
-![Screenshot_20231001_232259_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/05e0e839-51c3-4c24-90a3-9c0ce8d4d3b8)
-![Screenshot_20231001_232504_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/2aea8f54-434a-47e9-88b9-645baf256ed3)
-![Screenshot_20231001_232320_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/6556fb23-7010-41c0-93a0-63906c252d2b)
+[![Screenshot-20231001-232504-To-Do-List.jpg](https://i.postimg.cc/9Fd2LyFY/Screenshot-20231001-232504-To-Do-List.jpg)](https://postimg.cc/Vdk26rtJ)
+[![Screenshot-20231001-232259-To-Do-List.jpg](https://i.postimg.cc/90f9LcyG/Screenshot-20231001-232259-To-Do-List.jpg)](https://postimg.cc/cgV6Hy9H)
+[![Screenshot-20231001-232320-To-Do-List.jpg](https://i.postimg.cc/rmf0077z/Screenshot-20231001-232320-To-Do-List.jpg)](https://postimg.cc/njQcNSFt)
 
 

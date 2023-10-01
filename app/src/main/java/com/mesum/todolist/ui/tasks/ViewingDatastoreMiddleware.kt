@@ -96,12 +96,24 @@ private val deleteTaskUseCase: DeleteTaskUseCase
 
     private suspend fun sortTasks(sortBy: String, store: Store<ViewTaskViewState, ViewTaskAction>) {
         val tasks = context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()
+
         val sortedTasks: List<Task> = when (sortBy) {
-            "Priority" -> tasks.sortedByDescending { it.priority }
-            "Due Date" -> tasks.sortedByDescending { it.dueDate }
+            "Priority" -> {
+                tasks.sortedWith(compareBy<Task> {
+                    when (it.priority) {
+                        "High Priority" -> 3
+                        "Medium Priority" -> 2
+                        "Low Priority" -> 1
+                        else -> 0 // Default to 0 for unrecognized priorities
+                    }
+                })
+            }
+            "Due Date" -> tasks.sortedBy { it.dueDate }
             "Completion Status" -> tasks.sortedByDescending { it.isCompleted }
             else -> tasks // Default to original order if sortBy is not recognized
         }
+
         store.dispatch(ViewTaskAction.TasksSorted(sortedTasks))
     }
+
 }

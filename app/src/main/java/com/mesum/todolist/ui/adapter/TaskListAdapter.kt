@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,17 +18,27 @@ class TaskListAdapter(private val onClickCmptTask: (Task) -> Unit, private val o
     private val CATEGORY_VIEW_TYPE = 0
     private val TASK_VIEW_TYPE = 1
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.textTitle)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.textDescription)
-        private val completeCheckBox: CheckBox = itemView.findViewById(R.id.complete_checkBox)
-        private val deleteTaskButton: ImageView = itemView.findViewById(R.id.delete_iv)
-        private val taskCategoryTextView: TextView = itemView.findViewById(R.id.task_category_tv)
+        private val titleTextView: TextView = itemView.findViewById(R.id.taskTitleTextView)
+        private val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+        private val completeCheckBox: CheckBox = itemView.findViewById(R.id.completeCheckBox)
+        private val deleteTaskButton: ImageView = itemView.findViewById(R.id.deleteImageView)
+        private val timeTextView: TextView = itemView.findViewById(R.id.timeTextView)
+        private val dateTextView: TextView = itemView.findViewById(R.id.dateTextView)
+        private val timeLinearLayout: LinearLayout = itemView.findViewById(R.id.time_linear_layout)
+        private val priorityTextView: TextView = itemView.findViewById(R.id.priorityTextView)
         fun bind(task: Task, onTaskClick: (Task) -> Unit, onDeleteTask: (Task) -> Unit) {
             titleTextView.text = task.title
             descriptionTextView.text = task.description
-            taskCategoryTextView.text = buildString { append("Category: ")
-                append(task.category)
+            priorityTextView.text = task.priority
+            if (task.dueDate?.isEmpty() == true || task.time?.isEmpty() == true){
+                timeLinearLayout.visibility = View.GONE
+            }else {
+                timeLinearLayout.visibility = View.VISIBLE
+                timeTextView.text = task.time
+                dateTextView.text = task.dueDate
             }
+
+
             // Bind other task properties as needed
             completeCheckBox.isChecked = task.isCompleted
             completeCheckBox.setOnClickListener {

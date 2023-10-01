@@ -97,10 +97,9 @@ private val deleteTaskUseCase: DeleteTaskUseCase
             "Priority" -> {
                 tasks.sortedByDescending { it.priority }
             }
-            "Due Date" -> tasks.sortedBy { it.dueDate }
+            "Due Date" -> tasks.sortedByDescending { it.dueDate }
             "Completion" -> {
-                val sortedList = tasks.sortedByDescending { it.isCompleted }
-                sortedList
+                tasks.sortedByDescending { it.isCompleted }
             }
             else -> tasks // Default to original order if sortBy is not recognized
         }
@@ -108,4 +107,20 @@ private val deleteTaskUseCase: DeleteTaskUseCase
         store.dispatch(ViewTaskAction.TasksSorted(sortedTasks))
     }
 
+    fun sortByIsCompleted(tasks: List<Task>): List<Task> {
+        val completedTasks = mutableListOf<Task>()
+        val incompleteTasks = mutableListOf<Task>()
+
+        for (task in tasks) {
+            if (task.isCompleted) {
+                completedTasks.add(task)
+            } else {
+                incompleteTasks.add(task)
+            }
+        }
+
+        return (completedTasks + incompleteTasks).sortedByDescending { it.isCompleted }
+    }
 }
+
+

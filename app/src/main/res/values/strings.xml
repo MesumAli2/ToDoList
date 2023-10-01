@@ -44,13 +44,20 @@
         <item>Wishlist</item>
         <item>Outing</item>
     </string-array>
+    <string-array name="spinner_selection">
+        <item>Pick Category</item>
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Shopping</item>
+        <item>Wishlist</item>
+        <item>Outing</item>
+    </string-array>
     <string-array name="sorting_options">
-        <item>All List</item>
+        <item>Unsorted</item>
         <item>Priority</item>
         <item>Due Date</item>
         <item>Completion</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

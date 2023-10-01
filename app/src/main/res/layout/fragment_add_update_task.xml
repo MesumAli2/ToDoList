@@ -174,7 +174,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_weight="0.8"
                     android:layout_marginTop="4dp"
-                    android:entries="@array/spinner_options"
+                    android:entries="@array/spinner_selection"
                     android:fontFamily="@font/montserrat_medium"
                     android:layoutDirection="locale"
                     android:prompt="@string/choose_category"
@@ -255,8 +255,6 @@
                         android:text="@string/high_priority" />
 
 
-
-
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_low_priority"
                         android:layout_width="match_parent"
@@ -293,6 +291,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:backgroundTint="@color/customGreen2"
             android:clickable="true"
             app:layout_constraintBaseline_toBottomOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

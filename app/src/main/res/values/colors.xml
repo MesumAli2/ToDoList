@@ -9,10 +9,14 @@
     <color name="custom_spinner_dropdown_background_color">#FFC107</color>
     <color name="custom_spinner_dropdown_arrow_color">#FFC107</color>
     <color name="custom_spinner_text_color">#FFC107</color>
+    <color name="customGreen">#4CAF50</color>
+    <color name="customGreen2">#43A047</color>
 
 
 
-        <!-- Light Theme Colors -->
+
+
+    <!-- Light Theme Colors -->
         <color name="colorPrimaryLight">#4CAF50</color> <!-- Green -->
         <color name="colorPrimaryVariantLight">#388E3C</color> <!-- Slightly darker green -->
         <color name="colorAccentLight">#FF5722</color> <!-- Accent color (can be a complementary color) -->
@@ -24,6 +28,7 @@
         <color name="colorOnSurfaceLight">#000000</color> <!-- Black text on the surface -->
         <color name="colorErrorLight">#D32F2F</color> <!-- Red for errors -->
         <color name="colorOnErrorLight">#FFFFFF</color> <!-- White text on error background -->
+
 
 
 

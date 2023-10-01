@@ -34,7 +34,7 @@ class CreatingDatastoreMiddleware @Inject constructor(
             store.dispatch(TaskAction.InvalidTaskTitle)
             return false
         }
-        if (currentState.category.isEmpty() || currentState.category == "All List") {
+        if (currentState.category.isEmpty() || currentState.category == "Pick Category") {
             store.dispatch(TaskAction.InvalidTaskCategory)
             return false
         }

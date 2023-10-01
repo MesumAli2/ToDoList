@@ -49,8 +49,6 @@ Key Components:
  6. Sorting and Filtering
 - Sort Tasks: Users have the option to sort tasks by various criteria, including priority, due date, and completeness.
 - Filtering: The application allows users to filter tasks based on category and other parameters.
-![Screenshot_20231001_232259_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/ddd8673b-aac5-4d7e-bdc0-9ddf5d03d6e3)
-
  7. Search
 - Search Functionality: Users can easily search for specific tasks using the search feature, helping them quickly locate the tasks they need.
 
@@ -65,5 +63,8 @@ To get started with the Todo List Application, follow these steps:
 3. Build and run the application.
 
 4. Explore the features.
+![Screenshot_20231001_232259_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/05e0e839-51c3-4c24-90a3-9c0ce8d4d3b8)
+![Screenshot_20231001_232504_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/2aea8f54-434a-47e9-88b9-645baf256ed3)
+![Screenshot_20231001_232320_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/6556fb23-7010-41c0-93a0-63906c252d2b)
 
 

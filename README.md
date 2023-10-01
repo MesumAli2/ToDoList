@@ -49,6 +49,7 @@ Key Components:
  6. Sorting and Filtering
 - Sort Tasks: Users have the option to sort tasks by various criteria, including priority, due date, and completeness.
 - Filtering: The application allows users to filter tasks based on category and other parameters.
+![Screenshot_20231001_232259_ToDoList](https://github.com/MesumAli2/ToDoList/assets/93323387/ddd8673b-aac5-4d7e-bdc0-9ddf5d03d6e3)
 
  7. Search
 - Search Functionality: Users can easily search for specific tasks using the search feature, helping them quickly locate the tasks they need.

@@ -31,6 +31,8 @@
     <string name="select_category">Select Category</string>
     <string name="sort_tasks">Sort Tasks</string>
     <string name="mandatory_fields_are_labeled_with_an_asterisk">Mandatory fields are labeled with an asterisk. *</string>
+    <string name="empty_recycler_view_message">No tasks found. Tap the + button to add a new task.</string>
+
     <string name="priority_high">Priority High</string>
     <string name="date">Date</string>
     <string name="time">Time</string>

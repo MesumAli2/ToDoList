@@ -98,19 +98,53 @@
     </LinearLayout>
 
     <!-- RecyclerView -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_task"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sortTasksLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_task"
-        />
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_task" />
+
+    <!-- Arrow pointing towards Add Task FloatingActionButton -->
+
 
     <!-- FloatingActionButton -->
+
+    <TextView
+        android:id="@+id/emptyRecyclerViewMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/empty_recycler_view_message"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sortTasksLayout"
+        app:layout_constraintVertical_bias="0.746" />
+
+    <ImageView
+        android:id="@+id/arrowImageView"
+        android:layout_width="187dp"
+        android:layout_height="109dp"
+        android:src="@drawable/arrow_right_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sortTasksLayout"
+        app:layout_constraintVertical_bias="0.966" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_task_btn"
         android:layout_width="wrap_content"

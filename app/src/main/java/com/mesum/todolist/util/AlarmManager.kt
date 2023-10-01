@@ -76,6 +76,12 @@ fun createNotification(context: Context, taskName: String?, taskCategory: String
 }
 
 
+fun Context.convertTime(inputTime: String): String {
+    val inputFormat = SimpleDateFormat("hh:mm a", Locale.US)
+    val outputFormat = SimpleDateFormat("h a", Locale.US)
+    val time = inputFormat.parse(inputTime)
+    return outputFormat.format(time)
+}
 
 
 // Function to set a reminder for a task using AlarmManager

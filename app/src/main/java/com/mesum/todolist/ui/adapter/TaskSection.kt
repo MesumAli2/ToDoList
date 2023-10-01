@@ -23,20 +23,20 @@ class TaskSection(
     }
 
     override fun getItemViewHolder(view: View): RecyclerView.ViewHolder {
-        return TaskListAdapter.TaskViewHolder(view)
+        return TaskViewHolder(view)
     }
 
     override fun onBindItemViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val taskViewHolder = holder as TaskListAdapter.TaskViewHolder
+        val taskViewHolder = holder as TaskViewHolder
         taskViewHolder.bind(tasks[position], onDeleteTask = onDeleteTask, onTaskClick = onClickCmptTask)
     }
 
     override fun getHeaderViewHolder(view: View): RecyclerView.ViewHolder {
-        return TaskListAdapter.CategoryViewHolder(view)
+        return CategoryViewHolder(view)
     }
 
     override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder) {
-        val categoryViewHolder = holder as TaskListAdapter.CategoryViewHolder
+        val categoryViewHolder = holder as CategoryViewHolder
         categoryViewHolder.bind(category)
     }
 }

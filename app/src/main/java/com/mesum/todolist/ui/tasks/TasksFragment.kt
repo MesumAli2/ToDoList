@@ -17,8 +17,6 @@ import androidx.navigation.fragment.findNavController
 import com.mesum.todolist.R
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.databinding.FragmentTaskBinding
-import com.mesum.todolist.ui.adapter.TaskListAdapter
-import com.mesum.todolist.ui.adapter.TaskSection
 import com.mesum.todolist.ui.adapter.TaskSectionAdapter
 import com.mesum.todolist.util.onItemSelected
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,7 +101,7 @@ class TasksFragment : Fragment() {
     private fun setUpRecyclerView() {
         val sectionAdapter = createSectionAdapter()
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             viewModel.viewState.collect { state ->
                 Log.d("TasksViewState", state.toString())
 
@@ -112,6 +110,14 @@ class TasksFragment : Fragment() {
                     binding.recyclerViewTask.adapter = sectionAdapter
                     sectionAdapter.setTasks(state.allTasks.reversed())
                 }
+               if ( state.allTasks.isEmpty() ){
+                   binding.emptyRecyclerViewMessage.visibility = View.VISIBLE
+                   binding.arrowImageView.visibility = View.VISIBLE
+               }else{
+                   binding.emptyRecyclerViewMessage.visibility = View.GONE
+                   binding.arrowImageView.visibility = View.GONE
+
+               }
             }
         }
     }

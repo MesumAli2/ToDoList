@@ -37,12 +37,12 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string-array name="spinner_options">
-            <item>All List</item>
-             <item>Work</item>
-            <item>Personal</item>
-            <item>Shopping</item>
-            <item>Wishlist</item>
-            <item>Outing</item>
+        <item>All List</item>
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Shopping</item>
+        <item>Wishlist</item>
+        <item>Outing</item>
     </string-array>
     <string-array name="sorting_options">
         <item>All List</item>
@@ -50,5 +50,7 @@
         <item>Due Date</item>
         <item>Completion</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

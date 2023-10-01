@@ -23,9 +23,6 @@ data class AddTaskViewState(
     val errorDescription: String?,
     val errorPriority: String?,
     val errorCategory: String?,
-
-
-
     val taskAdded : Boolean
 ) : State {
     companion object {

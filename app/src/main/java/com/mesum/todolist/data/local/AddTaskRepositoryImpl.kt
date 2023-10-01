@@ -6,6 +6,7 @@ import com.mesum.todolist.domain.entitymapper.AddTaskEntityMapper
 import com.mesum.todolist.domain.repository.AddTaskRepository
 import com.mesum.todolist.ui.addtask.AddTaskViewState
 import com.mesum.todolist.util.dataStore
+import com.mesum.todolist.util.setReminder
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -35,6 +36,11 @@ class AddTaskRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun createReminder(task: AddTaskViewState): Boolean {
+        context.setReminder(task.id, task.dueDate.toString(), task.time.toString())
+
+        return true
+    }
 
 
 }

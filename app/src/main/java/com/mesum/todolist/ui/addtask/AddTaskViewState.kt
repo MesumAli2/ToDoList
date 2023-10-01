@@ -13,6 +13,7 @@ data class AddTaskViewState(
     val title: String,
     val description: String ,
     val dueDate : String? ,
+    val time: String?,
     val category: String ,
     val priority : String ,
     val creatingTask : Boolean ,
@@ -36,7 +37,8 @@ data class AddTaskViewState(
                 creatingTask = false,
                 showProgressBar = false,
                 isCompleted = false,
-                taskAdded = false
+                taskAdded = false,
+                time = ""
 
             )
         }

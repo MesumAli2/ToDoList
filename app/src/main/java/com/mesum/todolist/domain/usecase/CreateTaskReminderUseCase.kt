@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class CreateTaskReminderUseCase  @Inject constructor(
     private val addTaskRepo: AddTaskRepository
-) : UseCase<String, Boolean>() {
+) : UseCase<AddTaskViewState, Boolean>() {
 
-    override suspend fun execute(task: String): Boolean {
-        return addTaskRepo.createReminder(task.toString())
+    override suspend fun execute(task: AddTaskViewState): Boolean {
+        return addTaskRepo.createReminder(task)
     }
 }

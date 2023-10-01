@@ -19,6 +19,9 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
             is TaskAction.TaskDueDateChanged -> {
                 newStateWithDueDate(currentState, action)
             }
+            is TaskAction.TaskTimeChanged -> {
+                newStateWithTime(currentState, action)
+            }
             is TaskAction.TaskCategoryChanged -> {
                 newStateWithCategory(currentState, action)
             }
@@ -49,6 +52,11 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
             else -> currentState
         }
     }
+
+    private fun newStateWithTime(
+        currentState: AddTaskViewState,
+        action: TaskAction.TaskTimeChanged
+    ) = currentState.copy(time = action.newTime)
 
     private fun invalidTaskCreation(currentState: AddTaskViewState) =
         currentState.copy(error = "Database entry failed")

@@ -68,5 +68,13 @@ class AddTaskViewModel @Inject constructor(
         }
     }
 
+    fun takTimeDateChanged(selectedTime: String) {
+        val action = TaskAction.TaskTimeChanged(selectedTime)
+        viewModelScope.launch {
+            store.dispatch(action)
+        }
+
+    }
+
 
 }

@@ -94,6 +94,8 @@ class AddTaskFragment : Fragment() {
         binding.timepickerActions.setOnClickListener {
             it.showTimePickerDialog(requireActivity()) { selectedTime ->
                 binding.timepickerActions.setText(selectedTime)
+                viewModel.takTimeDateChanged(selectedTime)
+
             }
         }
     }

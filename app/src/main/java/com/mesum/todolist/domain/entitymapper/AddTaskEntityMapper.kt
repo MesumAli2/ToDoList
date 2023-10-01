@@ -16,7 +16,8 @@ class AddTaskEntityMapper @Inject constructor() : Mapper<AddTaskViewState, Task>
             dueDate = left.dueDate,
             category = left.category,
             priority = left.priority,
-            isCompleted = left.isCompleted
+            isCompleted = left.isCompleted,
+            time = left.time
         )
     }
 }

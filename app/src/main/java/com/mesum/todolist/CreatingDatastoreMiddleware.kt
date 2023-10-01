@@ -30,9 +30,7 @@ class CreatingDatastoreMiddleware @Inject constructor(
                 }
                 createTask(store, currentState)
             }
-            is TaskAction.CreateReminder -> {
-                createReminder(store, action.dueDate)
-            }
+
             else ->{
             }
         }
@@ -45,6 +43,7 @@ class CreatingDatastoreMiddleware @Inject constructor(
         val isSuccessful = createTaskUseCase.execute(task = currentState)
         if (isSuccessful) {
             store.dispatch(TaskAction.TaskCreationCompleted)
+            createReminder(store, currentState)
 
         } else {
             store.dispatch(TaskAction.TaskCreationFailed(Error(Throwable())))
@@ -53,7 +52,7 @@ class CreatingDatastoreMiddleware @Inject constructor(
 
     private suspend fun createReminder(
         store: Store<AddTaskViewState, TaskAction>,
-        dueDate: String
+        dueDate: AddTaskViewState
     ){
         val isSuccessful = createReminderUseCase.execute(dueDate)
         if (isSuccessful){

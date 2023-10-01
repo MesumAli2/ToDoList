@@ -49,7 +49,6 @@ Key Components:
  6. Sorting and Filtering
 - Sort Tasks: Users have the option to sort tasks by various criteria, including priority, due date, and completeness.
 - Filtering: The application allows users to filter tasks based on category and other parameters.
-
  7. Search
 - Search Functionality: Users can easily search for specific tasks using the search feature, helping them quickly locate the tasks they need.
 
@@ -64,5 +63,10 @@ To get started with the Todo List Application, follow these steps:
 3. Build and run the application.
 
 4. Explore the features.
+   
+[![Screenshot-20231001-232504-To-Do-List.jpg](https://i.postimg.cc/9Fd2LyFY/Screenshot-20231001-232504-To-Do-List.jpg)](https://postimg.cc/Vdk26rtJ)
+[![Screenshot-20231001-232259-To-Do-List.jpg](https://i.postimg.cc/90f9LcyG/Screenshot-20231001-232259-To-Do-List.jpg)](https://postimg.cc/cgV6Hy9H)
+[![Screenshot-20231001-232320-To-Do-List.jpg](https://i.postimg.cc/rmf0077z/Screenshot-20231001-232320-To-Do-List.jpg)](https://postimg.cc/njQcNSFt)
+[![Screenshot-20231001-230547-One-UI-Home.jpg](https://i.postimg.cc/66DRrxyG/Screenshot-20231001-230547-One-UI-Home.jpg)](https://postimg.cc/SjfJ45Ly)
 
 

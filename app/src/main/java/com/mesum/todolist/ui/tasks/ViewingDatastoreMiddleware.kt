@@ -42,6 +42,9 @@ private val deleteTaskUseCase: DeleteTaskUseCase
                 // Then dispatch a ViewTaskAction.ClearSelectedTask if needed
                 // store.dispatch(ViewTaskAction.ClearSelectedTask)
             }
+            is ViewTaskAction.TaskMarkAsCompleted -> {
+                markTasksAsCompleted(action.taskId)
+            }
             is ViewTaskAction.DeleteTaskButtonClicked -> {
                 deleteTask(store, action.taskId)
             }
@@ -99,12 +102,16 @@ private val deleteTaskUseCase: DeleteTaskUseCase
             }
             "Due Date" -> tasks.sortedByDescending { it.dueDate }
             "Completion" -> {
-                tasks.sortedByDescending { it.isCompleted }
+                tasks.sortedBy { it.isCompleted }
             }
             else -> tasks // Default to original order if sortBy is not recognized
         }
 
         store.dispatch(ViewTaskAction.TasksSorted(sortedTasks))
+    }
+
+    private suspend fun markTasksAsCompleted(taskId: String){
+       markTasksCmptUseCase.execute(taskId)
     }
 
     fun sortByIsCompleted(tasks: List<Task>): List<Task> {

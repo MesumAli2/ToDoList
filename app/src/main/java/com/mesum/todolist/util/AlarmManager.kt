@@ -1,7 +1,6 @@
 package com.mesum.todolist.util
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +11,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -46,17 +46,11 @@ fun createNotification(context: Context, taskName: String?, taskCategory: String
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
     }
-
-    // Check if the app has the POST_NOTIFICATIONS permission
     if (ActivityCompat.checkSelfPermission(
             context,
             Manifest.permission.POST_NOTIFICATIONS
         ) != PackageManager.PERMISSION_GRANTED
     ) {
-        // Request the missing permission
-        // You should handle the permission request result in your activity or fragment
-        // This is just a placeholder to request the permission
-        // Replace 'YourActivity' with the actual activity or fragment where you want to request the permission
         ActivityCompat.requestPermissions(
             MainActivity(),
             arrayOf(Manifest.permission.POST_NOTIFICATIONS),
@@ -67,10 +61,13 @@ fun createNotification(context: Context, taskName: String?, taskCategory: String
 
     // Create a notification
     val builder = NotificationCompat.Builder(context, "task_notification_channel")
-        .setSmallIcon(androidx.core.R.drawable.notification_bg_low)
+        .setSmallIcon(R.drawable.create_task_24)
+        .setLights(0x4CAF50, 1000, 1000)
         .setContentTitle("Task Reminder")
         .setContentText("Task: $taskName\nCategory: $taskCategory")
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setVibrate(longArrayOf(1000, 1000, 1000)) // Vibrate pattern (in milliseconds)
+        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
 
     // Show the notification
     with(NotificationManagerCompat.from(context)) {
@@ -82,38 +79,42 @@ fun createNotification(context: Context, taskName: String?, taskCategory: String
 
 
 // Function to set a reminder for a task using AlarmManager
-fun Context.setReminder(taskId: String, dateString: String, timeStr: String) {
-    val dateStr = dateString
-    val timeStr = timeStr
+fun Context.setReminder(taskId: String, dateString: String, timeString: String,
+                        taskName: String, category: String) {
 
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
     val intent = Intent(this, AlarmReceiver::class.java)
     intent.putExtra("task_id", taskId)
+    intent.putExtra("taskName", taskName)
+    intent.putExtra("taskCategory",category )
 
-    val dateTimestamp = convertDateToTimestamp(dateStr)
-    val timeTimestamp = convertTimeToTimestamp(timeStr)
+    val dateTimestamp = convertDateToTimestamp(dateString)
+    val timeTimestamp = convertTimeToTimestamp(timeString)
     val dateTimeTimestamp = dateTimestamp + timeTimestamp
+
+    Log.d("CompleteTimeStamp", dateTimeTimestamp.toString())
 
     val pendingIntent = PendingIntent.getBroadcast(
         this,
-        taskId.hashCode(), // Unique ID for the pending intent
+        taskId.hashCode(),
         intent,
         PendingIntent.FLAG_IMMUTABLE
     )
 
-    // Set the alarm to trigger at the specified date and time
     alarmManager.setExact(
         AlarmManager.RTC_WAKEUP,
         dateTimeTimestamp,
-        pendingIntent,
-
+        pendingIntent
     )
 }
+
 
 // Function to convert a date string in "yyyy-MM-dd" format to a timestamp
 fun Context.convertDateToTimestamp(dateStr: String): Long {
     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val date = sdf.parse(dateStr)
+    Log.d("DataTimeStamp", date.time.toString())
+
     return date?.time ?: 0
 }
 
@@ -121,6 +122,7 @@ fun Context.convertDateToTimestamp(dateStr: String): Long {
 fun Context.convertTimeToTimestamp(timeStr: String): Long {
     val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
     val date = sdf.parse(timeStr)
+    Log.d("TimeStamp", date.time.toString())
     return date?.time ?: 0
 }
 

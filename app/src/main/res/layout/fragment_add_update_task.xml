@@ -29,18 +29,8 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_margin="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/create_task_24" />
-
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -55,55 +45,68 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/what_is_to_be_done"
-                />
+                android:fontFamily="@font/montserrat"
+                android:text="@string/what_is_to_be_done" />
+            <LinearLayout
+                android:id="@+id/add_task_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
 
             <EditText
                 android:id="@+id/add_task_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/title_hint"
                 android:maxLines="1"
+                android:layout_weight="0.8"
+                android:inputType="textAutoCorrect"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:src="@drawable/mandatory_star_24"
+                android:layout_gravity="center_vertical"
+                />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/due_date"
                 android:layout_marginTop="16dp"
-                />
-
-
-
+                android:fontFamily="@font/montserrat"
+                android:text="@string/due_date" />
 
 
             <LinearLayout
                 android:id="@+id/date_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/date_picker_actions"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:ems="10"
-                android:layout_weight="0.8"
-                android:layout_marginEnd="12dp"
-                android:hint="@string/date_not_set"
-                android:clickable="false"
-                android:focusable="false"
-                />
+                <EditText
+                    android:id="@+id/date_picker_actions"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="0.8"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/date_not_set"
+                    android:inputType="none" />
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/calendar_24"
                     android:layout_marginTop="4dp"
-                    />
+                    android:src="@drawable/calendar_24" />
 
             </LinearLayout>
 
@@ -112,123 +115,173 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/timepicker_actions"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:ems="10"
-                    android:layout_weight="0.8"
                     android:layout_marginEnd="12dp"
-                    android:hint="@string/time_not_set_all_day"
-                    android:focusable="false"
+                    android:layout_weight="0.8"
                     android:clickable="false"
-                    />
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/time_not_set_all_day"
+                    android:inputType="none" />
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/tme_picker_24"
                     android:layout_marginTop="4dp"
+                    android:src="@drawable/tme_picker_24" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/notifications"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="@string/no_notifications_if_date_is_not_set" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/choose_category" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/category_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="0.8"
+                    android:layout_marginTop="4dp"
+                    android:entries="@array/spinner_options"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layoutDirection="locale"
+                    android:prompt="@string/choose_category"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/category_selector_24" />
+
+                <ImageView
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:src="@drawable/mandatory_star_24"
+                    android:layout_gravity="center_vertical"
                     />
 
             </LinearLayout>
 
 
-
-
-
-            <TextView
+            <EditText
+                android:id="@+id/category_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/notifications"
-                android:autoLink="web"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/no_notifications_if_date_is_not_set"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/choose_category"/>
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="top"
+                android:background="@android:color/transparent"
+                android:inputType="none"
+                android:focusable="false"
+
+              />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/category_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/spinner_options"
-                android:spinnerMode="dropdown"
-                android:layout_marginEnd="12dp"
-                android:layoutDirection="locale"
-                android:prompt="@string/choose_category"
-                android:layout_weight="0.8"
-                />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/category_selector_24"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="4dp"
-                    />
-
-
-            </LinearLayout>
-
             <EditText
                 android:id="@+id/add_task_description"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:layout_weight="0.9"
+                android:fontFamily="@font/montserrat_medium"
                 android:gravity="top"
+                android:inputType="textMultiLine"
                 android:hint="@string/description_hint" />
+                <ImageView
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/mandatory_star_24"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="bottom"
+                    />
+            </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="horizontal">
+
+
                 <RadioGroup
                     android:id="@+id/radio_group_priority"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    >
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_high_priority"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/high_priority"
-                        />
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/high_priority" />
+
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_medium_priority"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/medium_priority"
-                        />
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/medium_priority" />
+
+
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_low_priority"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/low_priority"
-                        />
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/low_priority" />
+
                 </RadioGroup>
 
+                <ImageView
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/mandatory_star_24"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="top"
+                    />
+
+
             </LinearLayout>
-
-
 
 
             <ProgressBar
@@ -239,6 +292,30 @@
                 android:visibility="gone" />
 
         </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:layout_constraintBaseline_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/create_task_24"
+            android:focusable="true" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:textSize="9dp"
+            android:text="@string/mandatory_fields_are_labeled_with_an_asterisk"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="12dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -21,6 +21,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.DatePickerDialog
+
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
 import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
@@ -68,6 +72,27 @@ fun addFragmentToActivity(
 }
 
 val Context.dataStore by dataStore("tasks.json", TaskStateSerializer)
+
+
+
+fun Fragment.setupToolbarWithNavigation(
+    toolbarId: Int,
+    title: String?,
+    displayHomeAsUpEnabled: Boolean = true
+) {
+    val toolbar = view?.findViewById<Toolbar>(toolbarId)
+    val appCompatActivity = activity as? AppCompatActivity
+
+    appCompatActivity?.apply {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
+        supportActionBar?.title = title
+    }
+
+    toolbar?.setNavigationOnClickListener {
+        findNavController().navigateUp()
+    }
+}
 
 fun Context.showDatePickerDialog(dateSetListener: DatePickerDialog.OnDateSetListener) {
     val calendar = Calendar.getInstance()
@@ -248,26 +273,6 @@ fun Context.requestNotificationPermissionAndExecute(callback: () -> Unit) {
     }
 }
 
-fun Context.setAlarm(taskId: String, dateTime: Long) {
-    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    val intent = Intent(this, AlarmReceiver::class.java)
-    intent.putExtra("task_id", taskId)
 
-    val requestCode = taskId.hashCode() // Unique ID for the pending intent
-
-    val pendingIntent = PendingIntent.getBroadcast(
-        this,
-        requestCode,
-        intent,
-        PendingIntent.FLAG_UPDATE_CURRENT
-    )
-
-    // Set the alarm to trigger at the specified date and time
-    alarmManager.setExact(
-        AlarmManager.RTC_WAKEUP,
-        dateTime,
-        pendingIntent
-    )
-}
 
  val requestCode = 98765

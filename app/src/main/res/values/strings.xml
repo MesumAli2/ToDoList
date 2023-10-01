@@ -31,6 +31,7 @@
     <string name="category_heading">Category Heading</string>
     <string name="select_category">Select Category</string>
     <string name="sort_tasks">Sort Tasks</string>
+    <string name="mandatory_fields_are_labeled_with_an_asterisk">Mandatory fields are labeled with an asterisk. *</string>
     <string-array name="spinner_options">
             <item>All List</item>
              <item>Work</item>

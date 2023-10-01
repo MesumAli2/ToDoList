@@ -1,50 +1,64 @@
 package com.mesum.todolist
 
 
-import android.content.Context
 import com.mesum.todolist.domain.usecase.CreateTaskReminderUseCase
 import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.redux.Middleware
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
 import com.mesum.todolist.ui.addtask.AddTaskViewState
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class CreatingDatastoreMiddleware @Inject constructor(
     private val createTaskUseCase: CreateTaskUseCase,
-    private val createReminderUseCase: CreateTaskReminderUseCase,
-
-    ) : Middleware<AddTaskViewState, TaskAction> {
+    private val createReminderUseCase: CreateTaskReminderUseCase
+) : Middleware<AddTaskViewState, TaskAction> {
 
     override suspend fun process(
         action: TaskAction,
         currentState: AddTaskViewState,
         store: Store<AddTaskViewState, TaskAction>
     ) {
-        when (action) {
-            is TaskAction.CreateTaskButtonClicked -> {
-                if (currentState.title.isEmpty() || currentState.description.isEmpty()) {
-                    store.dispatch(TaskAction.InvalidTask)
-                    return
-                }
-                createTask(store, currentState)
-            }
-
-            else ->{
+        if (action is TaskAction.CreateTaskButtonClicked) {
+            if (validateTaskFields(currentState, store)) {
+                createTaskAndReminder(store, currentState)
             }
         }
     }
-    private suspend fun createTask(
+
+    private suspend fun validateTaskFields(
+        currentState: AddTaskViewState,
+        store: Store<AddTaskViewState, TaskAction>
+    ): Boolean {
+        if (currentState.title.isEmpty()) {
+            store.dispatch(TaskAction.InvalidTaskTitle)
+            return false
+        }
+        if (currentState.category.isEmpty() || currentState.category == "All List") {
+            store.dispatch(TaskAction.InvalidTaskCategory)
+            return false
+        }
+        if (currentState.description.isEmpty()) {
+            store.dispatch(TaskAction.InvalidTaskDescription)
+            return false
+        }
+        if (currentState.priority.isEmpty()) {
+            store.dispatch(TaskAction.InvalidTaskPriority)
+            return false
+        }
+        return true
+    }
+
+    private suspend fun createTaskAndReminder(
         store: Store<AddTaskViewState, TaskAction>,
         currentState: AddTaskViewState
     ) {
         store.dispatch(TaskAction.TaskCreationStarted)
-        val isSuccessful = createTaskUseCase.execute(task = currentState)
-        if (isSuccessful) {
+        val isTaskSuccessful = createTaskUseCase.execute(task = currentState)
+
+        if (isTaskSuccessful) {
             store.dispatch(TaskAction.TaskCreationCompleted)
             createReminder(store, currentState)
-
         } else {
             store.dispatch(TaskAction.TaskCreationFailed(Error(Throwable())))
         }
@@ -52,15 +66,14 @@ class CreatingDatastoreMiddleware @Inject constructor(
 
     private suspend fun createReminder(
         store: Store<AddTaskViewState, TaskAction>,
-        dueDate: AddTaskViewState
-    ){
-        val isSuccessful = createReminderUseCase.execute(dueDate)
-        if (isSuccessful){
+        currentState: AddTaskViewState
+    ) {
+        val isReminderSuccessful = createReminderUseCase.execute(currentState)
+
+        if (isReminderSuccessful) {
             store.dispatch(TaskAction.TaskReminderCreated)
-        }else{
+        } else {
             store.dispatch(TaskAction.ReminderFailed)
         }
     }
-
-
 }

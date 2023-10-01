@@ -8,18 +8,24 @@ import java.util.UUID
  */
 data class AddTaskViewState(
     val id : String = "",
-    val isEmpty: Boolean ,
-    val isSaved: Boolean ,
+    val isEmpty: Boolean,
+    val isSaved: Boolean,
     val title: String,
-    val description: String ,
-    val dueDate : String? ,
+    val description: String,
+    val dueDate : String?,
     val time: String?,
-    val category: String ,
-    val priority : String ,
-    val creatingTask : Boolean ,
-    val showProgressBar: Boolean ,
+    val category: String,
+    val priority : String,
+    val creatingTask : Boolean,
+    val showProgressBar: Boolean,
     val isCompleted: Boolean,
-    val error: String?,
+    val errorTitle: String?,
+    val errorDescription: String?,
+    val errorPriority: String?,
+    val errorCategory: String?,
+
+
+
     val taskAdded : Boolean
 ) : State {
     companion object {
@@ -28,7 +34,10 @@ data class AddTaskViewState(
                 id = UUID.randomUUID().toString(),
                 title = "",
                 description = "",
-                error = null,
+                errorTitle = null,
+                errorDescription = null,
+                errorPriority = null,
+                errorCategory = null,
                 isEmpty = false,
                 isSaved = false,
                 dueDate = "",

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +15,7 @@ import com.mesum.todolist.R
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
 import com.mesum.todolist.util.onItemSelected
 import com.mesum.todolist.util.onRadioButtonSelected
+import com.mesum.todolist.util.setupToolbarWithNavigation
 import com.mesum.todolist.util.showDatePickerDialog
 import com.mesum.todolist.util.showTimePickerDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,7 +69,7 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        setupToolbarWithNavigation(binding.toolbar.id, getString(R.string.create_task))
     }
 
     private fun setupEditTextListeners() {
@@ -124,7 +125,12 @@ class AddTaskFragment : Fragment() {
             View.VISIBLE
         } else View.GONE
 
-        binding.addTaskTitle.error = viewState.error
+        binding.addTaskTitle.error = viewState.errorTitle
+        binding.categoryError.error = viewState.errorCategory
+        binding.addTaskDescription.error = viewState.errorDescription
+        binding.rbHighPriority.error = viewState.priority
+
+
     }
 
     companion object {

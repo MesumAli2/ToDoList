@@ -45,8 +45,18 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
                 // Handle task creation failure (e.g., show error message)
                 taskCreationFailed(currentState, action)
             }
-            is TaskAction.InvalidTask ->{
-                invalidTaskCreation(currentState)
+
+            is TaskAction.InvalidTaskTitle ->{
+                invalidTitle(currentState)
+            }
+            is TaskAction.InvalidTaskDescription ->{
+              invalidDescription(currentState)
+            }
+            is TaskAction.InvalidTaskCategory ->{
+                invalidCategory(currentState)
+            }
+            is TaskAction.InvalidTaskPriority ->{
+                invalidPriority(currentState)
             }
             // Handle other actions for updating and managing tasks here
             else -> currentState
@@ -58,18 +68,27 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
         action: TaskAction.TaskTimeChanged
     ) = currentState.copy(time = action.newTime)
 
-    private fun invalidTaskCreation(currentState: AddTaskViewState) =
-        currentState.copy(error = "Database entry failed")
+    private fun invalidTitle(currentState: AddTaskViewState) =
+        currentState.copy(errorTitle = "Please Enter Title")
+
+    private fun invalidDescription(currentState: AddTaskViewState) =
+        currentState.copy( errorDescription = "Please Enter Description")
+
+    private fun invalidCategory(currentState: AddTaskViewState) =
+        currentState.copy( errorCategory = " Please select category")
+
+    private fun invalidPriority(currentState: AddTaskViewState) =
+        currentState.copy( errorPriority = "Please pick your priority")
 
     private fun taskCreationFailed(
         currentState: AddTaskViewState,
         action: TaskAction.TaskCreationFailed
-    ) = currentState.copy(creatingTask = false, error = "Database Entry Error")
+    ) = currentState.copy(creatingTask = false, errorTitle = "DataStore Entry Error")
 
     private fun completeTaskCreation(currentState: AddTaskViewState) =
         currentState.copy(
             creatingTask = false,
-            error = null,
+            errorTitle = null,
             title = "",
             description = "",
             showProgressBar = false,
@@ -114,6 +133,6 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
     private fun newStateWithTitle(
         currentState: AddTaskViewState,
         action: TaskAction.TaskTitleChanged
-    ) = currentState.copy(title = action.newTitle, error = null)
+    ) = currentState.copy(title = action.newTitle, errorTitle = null)
 }
 

@@ -18,6 +18,8 @@
     <!-- Dark Theme Toolbar Style -->
     <style name="DarkThemeToolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+
         <!-- Add other toolbar customizations for dark mode -->
     </style>
 </resources>

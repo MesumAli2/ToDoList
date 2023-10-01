@@ -3,7 +3,7 @@ package com.mesum.todolist.ui.action
 import com.mesum.todolist.redux.Action
 
 /**
- *  Action that can be tri ggered from the AddTaskScreen
+ *  Action that can be triggered from the AddTaskScreen
  */
 sealed class TaskAction : Action {
     data class TaskTitleChanged(val newTitle: String) : TaskAction()
@@ -18,7 +18,12 @@ sealed class TaskAction : Action {
 
     object TaskCreationStarted : TaskAction()
     object TaskCreationCompleted : TaskAction()
-    object InvalidTask : TaskAction()
+    object InvalidTaskTitle : TaskAction()
+    object InvalidTaskDescription : TaskAction()
+    object InvalidTaskPriority : TaskAction()
+    object InvalidTaskCategory : TaskAction()
+
+
     data class TaskCreationFailed(val error: Throwable?) : TaskAction()
     data class CreateReminder(val dueDate: String) : TaskAction()
     object TaskReminderCreated : TaskAction()
@@ -32,5 +37,6 @@ sealed class TaskAction : Action {
 //    object TaskUpdateStarted : TaskAction()
 //    data class TaskUpdateFailed(val error: Throwable?) : TaskAction()
 //
+
 
 }

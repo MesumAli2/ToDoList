@@ -37,10 +37,18 @@ class AddTaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createReminder(task: AddTaskViewState): Boolean {
-        context.setReminder(task.id, task.dueDate.toString(), task.time.toString())
-
-        return true
+        task.dueDate?.let { dueDate ->
+            task.time?.let { time ->
+                if (dueDate.isNotBlank() && time.isNotBlank()) {
+                    context.setReminder(task.id, dueDate, time, task.title.toString(), task.category.toString())
+                    return true
+                }
+            }
+        }
+        return false
     }
+
+
 
 
 }

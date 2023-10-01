@@ -25,6 +25,7 @@ class CreatingDatastoreMiddleware @Inject constructor(
                     store.dispatch(TaskAction.InvalidTask)
                     return
                 }
+
                 createTask(store, currentState)
             }
             else ->{

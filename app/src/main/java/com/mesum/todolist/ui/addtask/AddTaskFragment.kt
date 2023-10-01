@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.mesum.todolist.R
 import com.mesum.todolist.databinding.FragmentAddUpdateTaskBinding
 import com.mesum.todolist.util.onItemSelected
 import com.mesum.todolist.util.onRadioButtonSelected
@@ -58,6 +60,9 @@ class AddTaskFragment : Fragment() {
         lifecycleScope.launchWhenResumed {
             viewModel.viewState.collectLatest { viewState ->
                 processViewState(viewState)
+                if (viewState.taskAdded)
+                    findNavController().navigate(R.id.tasksFragment)
+
             }
         }
     }

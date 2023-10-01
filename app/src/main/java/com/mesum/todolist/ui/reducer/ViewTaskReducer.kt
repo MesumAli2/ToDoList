@@ -31,6 +31,9 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
                 // Handle task deletion failed action here
                 handleFailedDelete(currentState)
             }
+            is ViewTaskAction.TaskMarkedCompleted -> {
+                handleTaskCompleted(action.task, currentState)
+            }
 
             is ViewTaskAction.TasksSorted ->{
                 sortTasks(action.task, currentState)
@@ -81,7 +84,15 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
             activeTasks = tasks.filter { !it.isCompleted }
         )
     }
+    private fun handleTaskCompleted(tasks: List<Task>, currentState: ViewTaskViewState):
+            ViewTaskViewState{
+        return currentState.copy(
+            allTasks = tasks,
+            completedTasks = tasks.filter { it.isCompleted },
+            activeTasks = tasks.filter { !it.isCompleted }
+        )
 
+    }
     private fun selectTask(
         taskId: String,
         currentState: ViewTaskViewState

@@ -1,5 +1,6 @@
 package com.mesum.todolist.ui.action
 import com.mesum.todolist.data.Task
+import com.mesum.todolist.data.Tasks
 import com.mesum.todolist.redux.Action
 
 sealed class ViewTaskAction : Action {
@@ -25,6 +26,8 @@ sealed class ViewTaskAction : Action {
     // Action to clear the selected task
     object ClearSelectedTask : ViewTaskAction()
     data class TaskMarkAsCompleted(val taskId: String) : ViewTaskAction()
+    data class TaskMarkedCompleted(val task: List<Task>) : ViewTaskAction()
+
     data class DeleteTaskButtonClicked(val taskId: String) : ViewTaskAction()
     object TaskDeletionStarted : ViewTaskAction()
     data class TaskDeletionCompleted(val taskId: String) : ViewTaskAction()

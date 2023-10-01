@@ -1,7 +1,7 @@
 package com.mesum.todolist.ui.tasks
 
 import android.content.Context
-import android.view.View
+import android.util.Log
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
 import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
@@ -45,9 +45,7 @@ private val deleteTaskUseCase: DeleteTaskUseCase
             is ViewTaskAction.DeleteTaskButtonClicked -> {
                 deleteTask(store, action.taskId)
             }
-            is ViewTaskAction.TaskMarkAsCompleted -> {
-                markTasksAsCompleted(action.taskId)
-            }
+
             is ViewTaskAction.SortTasks -> {
                 sortTasks(action.sortBy, store)
             }
@@ -90,26 +88,20 @@ private val deleteTaskUseCase: DeleteTaskUseCase
         store.dispatch(ViewTaskAction.TasksFiltered(filteredTasks))
     }
 
-    private suspend fun markTasksAsCompleted(taskId: String) {
-        markTasksCmptUseCase.execute(taskId)
-    }
+
 
     private suspend fun sortTasks(sortBy: String, store: Store<ViewTaskViewState, ViewTaskAction>) {
         val tasks = context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()
 
         val sortedTasks: List<Task> = when (sortBy) {
             "Priority" -> {
-                tasks.sortedWith(compareBy<Task> {
-                    when (it.priority) {
-                        "High Priority" -> 3
-                        "Medium Priority" -> 2
-                        "Low Priority" -> 1
-                        else -> 0 // Default to 0 for unrecognized priorities
-                    }
-                })
+                tasks.sortedByDescending { it.priority }
             }
             "Due Date" -> tasks.sortedBy { it.dueDate }
-            "Completion Status" -> tasks.sortedByDescending { it.isCompleted }
+            "Completion" -> {
+                val sortedList = tasks.sortedByDescending { it.isCompleted }
+                sortedList
+            }
             else -> tasks // Default to original order if sortBy is not recognized
         }
 

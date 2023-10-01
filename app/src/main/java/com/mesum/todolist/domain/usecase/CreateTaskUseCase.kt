@@ -3,7 +3,7 @@ package com.mesum.todolist.domain.usecase
 
 import com.mesum.todolist.domain.repository.AddTaskRepository
 import com.mesum.todolist.redux.UseCase
-import com.mesum.todolist.ui.addtask.AddTaskViewState
+import com.mesum.todolist.ui.createTask.AddTaskViewState
 import javax.inject.Inject
 
 class CreateTaskUseCase @Inject constructor(

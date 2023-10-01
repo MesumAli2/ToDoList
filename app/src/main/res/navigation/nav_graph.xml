@@ -6,11 +6,11 @@
 
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.mesum.todolist.ui.addtask.AddTaskFragment"
+        android:name="com.mesum.todolist.ui.createTask.AddTaskFragment"
         android:label="AddTaskFragment" />
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="com.mesum.todolist.ui.tasks.TasksFragment"
+        android:name="com.mesum.todolist.ui.tasks.TaskListFragment"
         android:label="TasksFragment" >
         <action
             android:id="@+id/action_tasksFragment_to_addTaskFragment"

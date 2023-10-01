@@ -12,10 +12,8 @@ sealed class TaskAction : Action {
     data class TaskTimeChanged(val newTime: String) : TaskAction()
     data class TaskCategoryChanged(val newCategory: String) : TaskAction()
     data class TaskPriorityChanged(val newPriority: String) : TaskAction()
-
     // For task creation
     object CreateTaskButtonClicked : TaskAction()
-
     object TaskCreationStarted : TaskAction()
     object TaskCreationCompleted : TaskAction()
     object InvalidTaskTitle : TaskAction()
@@ -23,20 +21,11 @@ sealed class TaskAction : Action {
     object InvalidTaskPriority : TaskAction()
     object InvalidTaskCategory : TaskAction()
 
-
     data class TaskCreationFailed(val error: Throwable?) : TaskAction()
-    data class CreateReminder(val dueDate: String) : TaskAction()
     object TaskReminderCreated : TaskAction()
-
     object ReminderFailed : TaskAction()
 
 
-
-//    // For task updating
-//    data class UpdateTaskButtonClicked(val taskId: String) : TaskAction()
-//    object TaskUpdateStarted : TaskAction()
-//    data class TaskUpdateFailed(val error: Throwable?) : TaskAction()
-//
 
 
 }

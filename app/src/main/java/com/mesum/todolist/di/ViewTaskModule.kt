@@ -1,15 +1,15 @@
 package com.mesum.todolist.di
 
 import android.content.Context
-import com.mesum.todolist.LoggingMiddleware
+import com.mesum.todolist.data.middleware.LoggingMiddleware
 import com.mesum.todolist.data.repo.TasksRepositoryImpl
 import com.mesum.todolist.domain.repository.TasksRepository
 import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
 import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.ViewTaskAction
-import com.mesum.todolist.ui.reducer.ViewTaskReducer
-import com.mesum.todolist.ui.tasks.ViewTaskViewState
+import com.mesum.todolist.ui.reducers.TaskListReducer
+import com.mesum.todolist.ui.tasks.TasksListViewState
 import com.mesum.todolist.data.middleware.ViewingDatastoreMiddleware
 import dagger.Module
 import dagger.Provides
@@ -40,10 +40,10 @@ object ViewTaskModule {
         @ApplicationContext context: Context,
         markTasksCmptUseCase: MarkTasksCmptUseCase,
         deleteTaskUseCase: DeleteTaskUseCase
-        ): Store<ViewTaskViewState, ViewTaskAction> {
+        ): Store<TasksListViewState, ViewTaskAction> {
         return Store(
-            initialState = ViewTaskViewState.idle(),
-            reducer = ViewTaskReducer(),
+            initialState = TasksListViewState.idle(),
+            reducer = TaskListReducer(),
             middlewares = listOf(
                 LoggingMiddleware(),
                 ViewingDatastoreMiddleware(

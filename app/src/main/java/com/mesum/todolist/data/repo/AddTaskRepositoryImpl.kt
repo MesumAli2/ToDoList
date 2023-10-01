@@ -1,11 +1,13 @@
 package com.mesum.todolist.data.repo
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
+import com.mesum.todolist.data.datastore.DataStoreManager.dataStore
 import com.mesum.todolist.domain.entitymapper.AddTaskEntityMapper
 import com.mesum.todolist.domain.repository.AddTaskRepository
-import com.mesum.todolist.ui.addtask.AddTaskViewState
-import com.mesum.todolist.util.dataStore
+import com.mesum.todolist.ui.createTask.AddTaskViewState
 import com.mesum.todolist.util.setReminder
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
@@ -36,6 +38,7 @@ class AddTaskRepositoryImpl @Inject constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override suspend fun createReminder(task: AddTaskViewState): Boolean {
         task.dueDate?.let { dueDate ->
             task.time?.let { time ->
@@ -47,9 +50,6 @@ class AddTaskRepositoryImpl @Inject constructor(
         }
         return false
     }
-
-
-
 
 }
 

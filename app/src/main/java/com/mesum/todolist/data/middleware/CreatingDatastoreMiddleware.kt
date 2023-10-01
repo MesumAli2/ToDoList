@@ -6,7 +6,7 @@ import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.redux.Middleware
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
-import com.mesum.todolist.ui.addtask.AddTaskViewState
+import com.mesum.todolist.ui.createTask.AddTaskViewState
 import javax.inject.Inject
 
 class CreatingDatastoreMiddleware @Inject constructor(

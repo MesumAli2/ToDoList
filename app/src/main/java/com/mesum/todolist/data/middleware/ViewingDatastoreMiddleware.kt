@@ -2,13 +2,13 @@ package com.mesum.todolist.data.middleware
 
 import android.content.Context
 import com.mesum.todolist.data.Task
+import com.mesum.todolist.data.datastore.DataStoreManager.dataStore
 import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
 import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
 import com.mesum.todolist.redux.Middleware
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.ViewTaskAction
-import com.mesum.todolist.ui.tasks.ViewTaskViewState
-import com.mesum.todolist.util.dataStore
+import com.mesum.todolist.ui.tasks.TasksListViewState
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
@@ -18,12 +18,12 @@ class ViewingDatastoreMiddleware @Inject constructor(
 private val markTasksCmptUseCase: MarkTasksCmptUseCase,
 private val deleteTaskUseCase: DeleteTaskUseCase
 // Other dependencies as needed
-) : Middleware<ViewTaskViewState, ViewTaskAction> {
+) : Middleware<TasksListViewState, ViewTaskAction> {
 
     override suspend fun process(
         action: ViewTaskAction,
-        currentState: ViewTaskViewState,
-        store: Store<ViewTaskViewState, ViewTaskAction>
+        currentState: TasksListViewState,
+        store: Store<TasksListViewState, ViewTaskAction>
     ) {
         when (action) {
             is ViewTaskAction.LoadTasksStarted -> {
@@ -57,12 +57,12 @@ private val deleteTaskUseCase: DeleteTaskUseCase
         }
     }
 
-    private suspend fun loadTasks(store: Store<ViewTaskViewState, ViewTaskAction>) {
+    private suspend fun loadTasks(store: Store<TasksListViewState, ViewTaskAction>) {
         val tasks = context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()
         store.dispatch(ViewTaskAction.LoadTasksCompleted(tasks))
     }
 
-    private suspend fun deleteTask(store: Store<ViewTaskViewState, ViewTaskAction>, taskId: String) {
+    private suspend fun deleteTask(store: Store<TasksListViewState, ViewTaskAction>, taskId: String) {
         store.dispatch(ViewTaskAction.TaskDeletionStarted)
         val isSuccessful = deleteTaskUseCase.execute(taskId)
         if (isSuccessful) {
@@ -72,7 +72,7 @@ private val deleteTaskUseCase: DeleteTaskUseCase
         }
     }
 
-    private suspend fun searchTasks(store: Store<ViewTaskViewState, ViewTaskAction>, query: String) {
+    private suspend fun searchTasks(store: Store<TasksListViewState, ViewTaskAction>, query: String) {
         val tasks = context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()
         val filteredTasks = tasks.filter { task ->
             task.title.contains(query, ignoreCase = true) ||
@@ -81,7 +81,7 @@ private val deleteTaskUseCase: DeleteTaskUseCase
         store.dispatch(ViewTaskAction.SearchQueryCompleted(searchedTasks = filteredTasks))
     }
 
-    private suspend fun filterTasksByCategory(category: String, store: Store<ViewTaskViewState, ViewTaskAction>) {
+    private suspend fun filterTasksByCategory(category: String, store: Store<TasksListViewState, ViewTaskAction>) {
         val tasks = context.dataStore.data.firstOrNull()?.tasks ?: emptyList()
         val filteredTasks = if (category == "All List") {
             tasks
@@ -93,7 +93,7 @@ private val deleteTaskUseCase: DeleteTaskUseCase
 
 
 
-    private suspend fun sortTasks(sortBy: String, store: Store<ViewTaskViewState, ViewTaskAction>) {
+    private suspend fun sortTasks(sortBy: String, store: Store<TasksListViewState, ViewTaskAction>) {
         val tasks = context.dataStore.data.firstOrNull()?.tasks ?: mutableListOf()
 
         val sortedTasks: List<Task> = when (sortBy) {

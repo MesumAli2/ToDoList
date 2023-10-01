@@ -2,7 +2,7 @@ package com.mesum.todolist.di
 
 import android.content.Context
 import com.mesum.todolist.data.middleware.CreatingDatastoreMiddleware
-import com.mesum.todolist.LoggingMiddleware
+import com.mesum.todolist.data.middleware.LoggingMiddleware
 import com.mesum.todolist.data.repo.AddTaskRepositoryImpl
 import com.mesum.todolist.domain.entitymapper.AddTaskEntityMapper
 import com.mesum.todolist.domain.repository.AddTaskRepository
@@ -10,8 +10,8 @@ import com.mesum.todolist.domain.usecase.CreateTaskReminderUseCase
 import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
-import com.mesum.todolist.ui.addtask.AddTaskViewState
-import com.mesum.todolist.ui.reducer.TaskReducer
+import com.mesum.todolist.ui.createTask.AddTaskViewState
+import com.mesum.todolist.ui.reducers.AddTaskReducer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,7 +53,7 @@ object AddTaskModule {
     fun provideAddTaskStore(@ApplicationContext context: Context): Store<AddTaskViewState, TaskAction> {
         return Store(
             initialState = AddTaskViewState.idle(),
-            reducer = TaskReducer(),
+            reducer = AddTaskReducer(),
             middlewares = listOf(
                 LoggingMiddleware(),
                 CreatingDatastoreMiddleware(createTaskUseCase = provideCreateTaskUseCase(

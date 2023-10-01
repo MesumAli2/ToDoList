@@ -3,8 +3,8 @@ package com.mesum.todolist.data.repo
 import android.content.Context
 import android.util.Log
 import com.mesum.todolist.data.Task
+import com.mesum.todolist.data.datastore.DataStoreManager.dataStore
 import com.mesum.todolist.domain.repository.TasksRepository
-import com.mesum.todolist.util.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject

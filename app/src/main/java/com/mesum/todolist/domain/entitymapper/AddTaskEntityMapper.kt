@@ -2,7 +2,7 @@ package com.mesum.todolist.domain.entitymapper
 
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.redux.Mapper
-import com.mesum.todolist.ui.addtask.AddTaskViewState
+import com.mesum.todolist.ui.createTask.AddTaskViewState
 import javax.inject.Inject
 
 class AddTaskEntityMapper @Inject constructor() : Mapper<AddTaskViewState, Task> {

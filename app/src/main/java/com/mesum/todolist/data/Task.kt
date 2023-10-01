@@ -14,16 +14,7 @@ data class Task(
     val category: String = "",
     val priority: String = "",
     val isCompleted: Boolean = false
-){
-    val titleForList =
-        title.ifEmpty {
-            description
-        }
-
-    val active = !isCompleted
-
-    val empty = title.isEmpty() && description.isEmpty()
-}
+)
 
 
 

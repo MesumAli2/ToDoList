@@ -2,7 +2,7 @@ package com.mesum.todolist.di
 
 import android.content.Context
 import com.mesum.todolist.LoggingMiddleware
-import com.mesum.todolist.data.local.TasksRepositoryImpl
+import com.mesum.todolist.data.repo.TasksRepositoryImpl
 import com.mesum.todolist.domain.repository.TasksRepository
 import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
 import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
@@ -10,13 +10,12 @@ import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.ViewTaskAction
 import com.mesum.todolist.ui.reducer.ViewTaskReducer
 import com.mesum.todolist.ui.tasks.ViewTaskViewState
-import com.mesum.todolist.ui.tasks.ViewingDatastoreMiddleware
+import com.mesum.todolist.data.middleware.ViewingDatastoreMiddleware
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

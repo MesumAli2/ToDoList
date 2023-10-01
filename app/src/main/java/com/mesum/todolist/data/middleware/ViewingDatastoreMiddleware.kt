@@ -1,13 +1,13 @@
-package com.mesum.todolist.ui.tasks
+package com.mesum.todolist.data.middleware
 
 import android.content.Context
-import android.util.Log
 import com.mesum.todolist.data.Task
 import com.mesum.todolist.domain.usecase.DeleteTaskUseCase
 import com.mesum.todolist.domain.usecase.MarkTasksCmptUseCase
 import com.mesum.todolist.redux.Middleware
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.ViewTaskAction
+import com.mesum.todolist.ui.tasks.ViewTaskViewState
 import com.mesum.todolist.util.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.firstOrNull

@@ -1,4 +1,4 @@
-package com.mesum.todolist.data.local
+package com.mesum.todolist.data.datastore
 
 import androidx.datastore.core.Serializer
 import com.mesum.todolist.data.Tasks

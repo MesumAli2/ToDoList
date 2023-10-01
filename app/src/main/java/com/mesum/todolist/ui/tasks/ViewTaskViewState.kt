@@ -4,8 +4,6 @@ import com.mesum.todolist.data.Task
 
 data class ViewTaskViewState(
     val allTasks: List<Task>,
-    val completedTasks: List<Task>,
-    val activeTasks: List<Task>,
     val selectedTaskId: String? = null,
     val loadingTasks: Boolean? = false
 ) : com.mesum.todolist.redux.State {
@@ -14,8 +12,6 @@ data class ViewTaskViewState(
         fun idle(): ViewTaskViewState {
             return ViewTaskViewState(
                 allTasks = emptyList(),
-                completedTasks = emptyList(),
-                activeTasks = emptyList(),
                 selectedTaskId = null,
                 loadingTasks = false
             )

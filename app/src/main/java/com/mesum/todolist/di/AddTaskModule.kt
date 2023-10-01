@@ -1,9 +1,9 @@
 package com.mesum.todolist.di
 
 import android.content.Context
-import com.mesum.todolist.CreatingDatastoreMiddleware
+import com.mesum.todolist.data.middleware.CreatingDatastoreMiddleware
 import com.mesum.todolist.LoggingMiddleware
-import com.mesum.todolist.data.local.AddTaskRepositoryImpl
+import com.mesum.todolist.data.repo.AddTaskRepositoryImpl
 import com.mesum.todolist.domain.entitymapper.AddTaskEntityMapper
 import com.mesum.todolist.domain.repository.AddTaskRepository
 import com.mesum.todolist.domain.usecase.CreateTaskReminderUseCase

@@ -80,16 +80,14 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
         // Update the state with the loaded tasks
         return currentState.copy(
             allTasks = tasks,
-            completedTasks = tasks.filter { it.isCompleted },
-            activeTasks = tasks.filter { !it.isCompleted }
+
         )
     }
     private fun handleTaskCompleted(tasks: List<Task>, currentState: ViewTaskViewState):
             ViewTaskViewState{
         return currentState.copy(
             allTasks = tasks,
-            completedTasks = tasks.filter { it.isCompleted },
-            activeTasks = tasks.filter { !it.isCompleted }
+
         )
 
     }
@@ -102,18 +100,15 @@ class ViewTaskReducer : Reducer<ViewTaskViewState, ViewTaskAction> {
     }
 
     private fun getSearchedTasks(searchedTasks: List<Task>, currentState: ViewTaskViewState): ViewTaskViewState{
-       return currentState.copy(allTasks = searchedTasks, activeTasks = searchedTasks.filter
-       { !it.isCompleted }, completedTasks = searchedTasks.filter { it.isCompleted })
+       return currentState.copy(allTasks = searchedTasks)
     }
 
     private fun filterTasks(tasks: List<Task>, currentState: ViewTaskViewState): ViewTaskViewState{
-        return currentState.copy(allTasks = tasks,activeTasks = tasks.filter
-        { !it.isCompleted }, completedTasks = tasks.filter { it.isCompleted })
+        return currentState.copy(allTasks = tasks)
     }
 
     private fun sortTasks(tasks: List<Task>, currentState: ViewTaskViewState): ViewTaskViewState{
-        return currentState.copy(allTasks = tasks,activeTasks = tasks.filter
-        { !it.isCompleted }, completedTasks = tasks.filter { it.isCompleted })
+        return currentState.copy(allTasks = tasks)
     }
 
     private fun clearSelectedTask(currentState: ViewTaskViewState): ViewTaskViewState {

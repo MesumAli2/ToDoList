@@ -37,6 +37,7 @@ class TaskReducer : Reducer<AddTaskViewState, TaskAction> {
                 // Handle task creation completed (e.g., hide progress, clear inputs)
                 completeTaskCreation(currentState)
             }
+
             is TaskAction.TaskCreationFailed -> {
                 // Handle task creation failure (e.g., show error message)
                 taskCreationFailed(currentState, action)

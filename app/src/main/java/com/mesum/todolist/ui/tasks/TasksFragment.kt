@@ -110,7 +110,7 @@ class TasksFragment : Fragment() {
                 // Update the RecyclerView's adapter with the sectionAdapter
                 withContext(Dispatchers.Main) {
                     binding.recyclerViewTask.adapter = sectionAdapter
-                    sectionAdapter.setTasks(state.allTasks)
+                    sectionAdapter.setTasks(state.allTasks.reversed())
                 }
             }
         }

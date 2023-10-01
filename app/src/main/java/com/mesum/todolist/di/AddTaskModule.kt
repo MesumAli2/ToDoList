@@ -6,6 +6,7 @@ import com.mesum.todolist.LoggingMiddleware
 import com.mesum.todolist.data.local.AddTaskRepositoryImpl
 import com.mesum.todolist.domain.entitymapper.AddTaskEntityMapper
 import com.mesum.todolist.domain.repository.AddTaskRepository
+import com.mesum.todolist.domain.usecase.CreateTaskReminderUseCase
 import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.redux.Store
 import com.mesum.todolist.ui.action.TaskAction
@@ -42,6 +43,13 @@ object AddTaskModule {
     }
 
     @Provides
+    @Singleton
+    fun provideCreateReminderUseCase(addTaskRepository: AddTaskRepository): CreateTaskReminderUseCase {
+        return CreateTaskReminderUseCase(addTaskRepository)
+    }
+
+
+    @Provides
     fun provideAddTaskStore(@ApplicationContext context: Context): Store<AddTaskViewState, TaskAction> {
         return Store(
             initialState = AddTaskViewState.idle(),
@@ -49,7 +57,10 @@ object AddTaskModule {
             middlewares = listOf(
                 LoggingMiddleware(),
                 CreatingDatastoreMiddleware(createTaskUseCase = provideCreateTaskUseCase(
-                    provideAddTaskRepository(context)))
+                    provideAddTaskRepository(context)), createReminderUseCase = provideCreateReminderUseCase(
+                    provideAddTaskRepository(context)
+                )
+                )
             )
         )
     }

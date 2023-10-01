@@ -18,6 +18,12 @@ sealed class TaskAction : Action {
     object TaskCreationCompleted : TaskAction()
     object InvalidTask : TaskAction()
     data class TaskCreationFailed(val error: Throwable?) : TaskAction()
+    data class CreateReminder(val dueDate: String) : TaskAction()
+    object TaskReminderCreated : TaskAction()
+
+    object ReminderFailed : TaskAction()
+
+
 
 //    // For task updating
 //    data class UpdateTaskButtonClicked(val taskId: String) : TaskAction()

@@ -2,6 +2,7 @@ package com.mesum.todolist
 
 
 import android.content.Context
+import com.mesum.todolist.domain.usecase.CreateTaskReminderUseCase
 import com.mesum.todolist.domain.usecase.CreateTaskUseCase
 import com.mesum.todolist.redux.Middleware
 import com.mesum.todolist.redux.Store
@@ -12,7 +13,9 @@ import javax.inject.Inject
 
 class CreatingDatastoreMiddleware @Inject constructor(
     private val createTaskUseCase: CreateTaskUseCase,
-) : Middleware<AddTaskViewState, TaskAction> {
+    private val createReminderUseCase: CreateTaskReminderUseCase,
+
+    ) : Middleware<AddTaskViewState, TaskAction> {
 
     override suspend fun process(
         action: TaskAction,
@@ -25,23 +28,21 @@ class CreatingDatastoreMiddleware @Inject constructor(
                     store.dispatch(TaskAction.InvalidTask)
                     return
                 }
-
                 createTask(store, currentState)
+            }
+            is TaskAction.CreateReminder -> {
+                createReminder(store, action.dueDate)
             }
             else ->{
             }
         }
     }
-
     private suspend fun createTask(
         store: Store<AddTaskViewState, TaskAction>,
         currentState: AddTaskViewState
     ) {
         store.dispatch(TaskAction.TaskCreationStarted)
-
-
         val isSuccessful = createTaskUseCase.execute(task = currentState)
-
         if (isSuccessful) {
             store.dispatch(TaskAction.TaskCreationCompleted)
 
@@ -49,4 +50,18 @@ class CreatingDatastoreMiddleware @Inject constructor(
             store.dispatch(TaskAction.TaskCreationFailed(Error(Throwable())))
         }
     }
+
+    private suspend fun createReminder(
+        store: Store<AddTaskViewState, TaskAction>,
+        dueDate: String
+    ){
+        val isSuccessful = createReminderUseCase.execute(dueDate)
+        if (isSuccessful){
+            store.dispatch(TaskAction.TaskReminderCreated)
+        }else{
+            store.dispatch(TaskAction.ReminderFailed)
+        }
+    }
+
+
 }

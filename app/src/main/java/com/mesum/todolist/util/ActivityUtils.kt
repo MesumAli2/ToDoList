@@ -19,9 +19,12 @@ package com.mesum.todolist.util
 import android.Manifest.permission.POST_NOTIFICATIONS
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.text.format.DateFormat
@@ -243,6 +246,28 @@ fun Context.requestNotificationPermissionAndExecute(callback: () -> Unit) {
         // Permission granted or already granted, execute your logic here
         callback()
     }
+}
+
+fun Context.setAlarm(taskId: String, dateTime: Long) {
+    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    val intent = Intent(this, AlarmReceiver::class.java)
+    intent.putExtra("task_id", taskId)
+
+    val requestCode = taskId.hashCode() // Unique ID for the pending intent
+
+    val pendingIntent = PendingIntent.getBroadcast(
+        this,
+        requestCode,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
+
+    // Set the alarm to trigger at the specified date and time
+    alarmManager.setExact(
+        AlarmManager.RTC_WAKEUP,
+        dateTime,
+        pendingIntent
+    )
 }
 
  val requestCode = 98765
